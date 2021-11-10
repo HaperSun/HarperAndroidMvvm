@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.sun.demo.R;
 
 import java.util.ArrayList;
@@ -20,9 +19,9 @@ import java.util.List;
 /**
  * @author: Harper
  * @date: 2021/11/9
- * @note:
+ * @note: 首页
  */
-public class MainActivity extends AppCompatActivity {
+public class HomepageActivity extends AppCompatActivity {
 
     private Context mContext;
     private List<String> mTitles;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        mContext = MainActivity.this;
+        mContext = HomepageActivity.this;
         mTitles = getTitles();
         Adapter adapter = new Adapter();
         mRecyclerView.setAdapter(adapter);
@@ -51,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> getTitles() {
         List<String> titles = new ArrayList<>();
         titles.add("GreenDao在登录成功后，的一个使用实例");
+        titles.add("一个模拟签名的实例");
         return titles;
     }
 
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     LoginActivity.startActivity(mContext);
                     break;
                 case 1:
+                    SignActivity.startActivity(mContext);
                     break;
                 default:
                     break;

@@ -1,3 +1,5 @@
 rootProject.name = "Demo01"
 include ':app'
 include ':LibDb'
+include ':LibSign'
+include ':LibCommon'

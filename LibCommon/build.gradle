@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
@@ -7,11 +7,11 @@ android {
     buildToolsVersion build_version.build_tools
 
     defaultConfig {
-        applicationId "com.sun.demo"
         minSdkVersion build_version.min_sdk
         targetSdkVersion build_version.target_sdk
-        versionCode build_version.version_code
-        versionName build_version.version_name
+        versionCode 1
+        versionName "1.0"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -27,10 +27,5 @@ android {
 }
 
 dependencies {
-    implementation target.appcompat
-    implementation target.material
-    implementation target.constraintlayout
-    implementation target.recyclerview
-    api project(':LibDb')
-    api project(':LibSign')
+    api target.annotation
 }

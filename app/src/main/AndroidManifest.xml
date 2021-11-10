@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Demo01">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.HomepageActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="fullSensor">
             <intent-filter>
@@ -21,6 +21,10 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".activity.SignActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="fullSensor" />
     </application>

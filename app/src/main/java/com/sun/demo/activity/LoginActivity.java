@@ -9,15 +9,16 @@ import android.os.Bundle;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
 import com.sun.demo.R;
+
 /**
  * @author: Harper
- * @date:   2021/11/10
+ * @date: 2021/11/10
  * @note: greendao 关于 userInfo 的一些操作
  */
 public class LoginActivity extends AppCompatActivity {
 
-    public static void startActivity(Context context){
-        Intent intent = new Intent(context,LoginActivity.class);
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 
