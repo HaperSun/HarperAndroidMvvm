@@ -3,16 +3,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion build_version.compile_sdk
+    buildToolsVersion build_version.build_tools
 
     defaultConfig {
         applicationId "com.sun.demo"
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion build_version.min_sdk
+        targetSdkVersion build_version.target_sdk
+        versionCode build_version.version_code
+        versionName build_version.version_name
     }
 
     buildTypes {
@@ -28,7 +27,9 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation target.appcompat
+    implementation target.material
+    implementation target.constraintlayout
+    implementation target.recyclerview
+    api project(':LibDb')
 }
