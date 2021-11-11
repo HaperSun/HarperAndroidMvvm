@@ -33,4 +33,5 @@ dependencies {
     implementation target.recyclerview
     api project(':LibDb')
     api project(':LibSign')
+    api project(':LibCommon')
 }

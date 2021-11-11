@@ -51,6 +51,7 @@ public class HomepageActivity extends AppCompatActivity {
         List<String> titles = new ArrayList<>();
         titles.add("GreenDao在登录成功后，的一个使用实例");
         titles.add("一个模拟签名的实例");
+        titles.add("handle的封装与使用");
         return titles;
     }
 
@@ -79,6 +80,9 @@ public class HomepageActivity extends AppCompatActivity {
                     break;
                 case 1:
                     SignActivity.startActivity(mContext);
+                    break;
+                case 2:
+                    HandleActivity.startActivity(mContext);
                     break;
                 default:
                     break;
