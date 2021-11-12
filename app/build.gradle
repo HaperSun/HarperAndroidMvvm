@@ -20,9 +20,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //启动dataBinding
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -31,6 +37,7 @@ dependencies {
     implementation target.material
     implementation target.constraintlayout
     implementation target.recyclerview
+    api (target.multitype, { exclude group: 'com.android.support' })
     api project(':LibDb')
     api project(':LibSign')
     api project(':LibCommon')

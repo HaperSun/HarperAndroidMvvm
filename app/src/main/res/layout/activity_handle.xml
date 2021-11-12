@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.HandleActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/handle_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_120"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dimen_10"
+        android:textSize="@dimen/font_32" />
+</LinearLayout>

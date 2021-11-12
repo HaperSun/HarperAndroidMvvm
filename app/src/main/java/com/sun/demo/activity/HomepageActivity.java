@@ -33,7 +33,6 @@ public class HomepageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         initData();
-
     }
 
     private void initView() {
@@ -52,6 +51,7 @@ public class HomepageActivity extends AppCompatActivity {
         titles.add("GreenDao在登录成功后，的一个使用实例");
         titles.add("一个模拟签名的实例");
         titles.add("handle的封装与使用");
+        titles.add("复杂的列表视图新写法MultiType");
         return titles;
     }
 
@@ -83,6 +83,9 @@ public class HomepageActivity extends AppCompatActivity {
                     break;
                 case 2:
                     HandleActivity.startActivity(mContext);
+                    break;
+                case 3:
+                    MultiTypeRecyclerViewActivity.startActivity(mContext);
                     break;
                 default:
                     break;

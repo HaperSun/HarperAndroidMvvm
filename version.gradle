@@ -8,6 +8,7 @@ version.greendao = "3.3.0"
 version.generator = "3.3.0"
 version.recyclerview = "1.2.0-alpha05"
 version.annotation = "1.1.0"
+version.multitype = "3.4.4"
 
 def target =[:]
 target.appcompat = "androidx.appcompat:appcompat:$version.appcompat"
@@ -17,6 +18,7 @@ target.greendao = "org.greenrobot:greendao:$version.greendao"
 target.generator = "org.greenrobot:greendao-generator:$version.generator"
 target.recyclerview = "androidx.recyclerview:recyclerview:$version.recyclerview"
 target.annotation = "androidx.annotation:annotation:$version.annotation"
+target.multitype = "me.drakeet.multitype:multitype:$version.multitype"
 
 ext.target = target
 
