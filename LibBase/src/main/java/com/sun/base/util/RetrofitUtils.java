@@ -40,7 +40,7 @@ public abstract class RetrofitUtils {
     public static void initRetrofit(Context context, Interceptor interceptor) {
 
         if (null == mOkHttpClient) {
-            mOkHttpClient = OkHttp3Utils.getOkHttpClient(context, interceptor);
+            mOkHttpClient = OkHttpUtils.getOkHttpClient(context, interceptor);
         }
 
         API_SERVER = BaseUtil.getServerUrl(context);
