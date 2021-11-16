@@ -10,8 +10,12 @@ android {
         applicationId "com.sun.demo"
         minSdkVersion build_version.min_sdk
         targetSdkVersion build_version.target_sdk
-        versionCode build_version.version_code
-        versionName build_version.version_name
+        versionCode config.app.versionCode
+        versionName config.app.versionName
+        manifestPlaceholders = [
+                //友盟
+                UMENG_APP_KEY: config.app.umeng_app_key
+        ]
     }
 
     buildTypes {
@@ -38,6 +42,7 @@ dependencies {
     implementation target.constraintlayout
     implementation target.recyclerview
     api (target.multitype, { exclude group: 'com.android.support' })
+    api project(':LibBase')
     api project(':LibDb')
     api project(':LibSign')
     api project(':LibCommon')

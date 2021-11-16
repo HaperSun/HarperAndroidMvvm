@@ -1,15 +1,17 @@
 package com.sun.demo.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.demo.R;
+import com.sun.demo.databinding.ActivityMultiTypeRecyclerViewBinding;
 import com.sun.demo.model.ImgBean;
-import com.sun.demo.model.MultiResponse;
+import com.sun.demo.model.response.MultiResponse;
 import com.sun.demo.model.TextBean;
 import com.sun.demo.widget.ImgViewBinder;
 import com.sun.demo.widget.TextViewBinder;
@@ -24,7 +26,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * @date: 2021/11/12
  * @note: 复杂的列表视图新写法MultiType
  */
-public class MultiTypeRecyclerViewActivity extends AppCompatActivity {
+public class MultiTypeRecyclerViewActivity extends BaseMvpActivity {
 
     private RecyclerView mRecyclerView;
 
@@ -41,7 +43,23 @@ public class MultiTypeRecyclerViewActivity extends AppCompatActivity {
         initData();
     }
 
-    private void initData() {
+    @Override
+    public int layoutId() {
+        return R.layout.activity_multi_type_recycler_view;
+    }
+
+    @Override
+    public void initView() {
+        ViewDataBinding viewDataBinding = getDataBinding();
+        if (viewDataBinding != null) {
+            ActivityMultiTypeRecyclerViewBinding binding = (ActivityMultiTypeRecyclerViewBinding) viewDataBinding;
+            mRecyclerView = binding.multiTypeRecyclerView;
+        }
+
+    }
+
+    @Override
+    public void initData() {
         List<Object> items = new ArrayList<>();
         List<MultiResponse> responses = MultiResponse.getMultiResponse();
         for (int i = 0; i < responses.size(); i++) {

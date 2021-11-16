@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.SignActivity">
+<layout>
 
-    <com.sun.demo.widget.CommonSignWidget
+    <com.sun.demo.widget.CommonSignWidget xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/aa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:padding="@dimen/dimen_20"/>
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_20"
+        tools:context=".activity.SignActivity" />
+</layout>

@@ -1,0 +1,61 @@
+ext.config = [:]
+
+def config = [:]
+
+//定义当前环境类型
+enum Environment {
+    TEST, //测试环境
+    DEVELOPMENT, //开发环境
+    RELEASE //正式环境
+}
+//当前环境类型 ENVIRONMENT，发布正式版本的时候请将这个改为 Environment.RELEASE !!!!!
+Environment environment = ENVIRONMENT
+
+//是否是测试环境，只要不是正式环境就认为是测试环境 (请注意这个测试环境和上面定义的开发环境类型中的测试环境是两个概念)
+def isTestApi = environment != Environment.RELEASE
+def releaseTimeStr = releaseTime()
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC")).toString() + DALIY_VERSION
+}
+
+def app = [:]
+app.versionCode = isTestApi ? Integer.parseInt(releaseTimeStr) : Integer.parseInt(VERSION_CODE)
+app.versionName = isTestApi ? releaseTimeStr : RELEASE_VERSION
+//友盟的app_key
+app.umeng_app_key = "5f03cead570df339ae000132"
+config.app = app
+
+//关于H5页面的url前缀的一些配置
+def h5 = [:]
+//H5的域名1
+h5.domain = isTestApi ? "h5测试地址" : "h5现网地址"
+config.h5 = h5
+
+//是否是测试环境
+config.isTestApi = isTestApi
+// 是否开启埋点   为了测试时产生的数据不影响埋点统计,所有测试环境埋点全部为 debug
+config.data_embed_point = isTestApi
+
+//关于服务端的地址配置
+def server = [:]
+//测试环境
+server.testUrl = "地址前缀"
+//准现网环境
+server.devUrl = "地址前缀"
+//现网环境
+server.formalUrl = "地址前缀"
+switch (environment) {
+    case Environment.TEST:
+        server.finalUrl = server.testUrl
+        break
+    case Environment.DEVELOPMENT:
+        server.finalUrl = server.devUrl
+        break
+    case Environment.RELEASE:
+        server.finalUrl = server.formalUrl
+        break
+}
+config.server = server
+
+ext.config = config

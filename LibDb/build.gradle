@@ -29,7 +29,7 @@ android {
     greendao {
         //指定数据库schema版本号，迁移等操作会用到
         //新增观测数据升级数据库版本 <原schemaVersion 1>
-        schemaVersion 1
+        schemaVersion 2
         //DaoSession、DaoMaster以及所有实体类的dao生成的目录,默认为你的entity所在的包名
         //daoPackage 包名
         daoPackage 'com.sun.db.greendao'

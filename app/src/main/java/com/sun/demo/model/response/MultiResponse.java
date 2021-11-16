@@ -1,4 +1,4 @@
-package com.sun.demo.model;
+package com.sun.demo.model.response;
 
 import com.sun.demo.R;
 

@@ -1,17 +1,18 @@
 package com.sun.demo.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.demo.R;
+import com.sun.demo.databinding.ActivityHomepageBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,25 +22,28 @@ import java.util.List;
  * @date: 2021/11/9
  * @note: 首页
  */
-public class HomepageActivity extends AppCompatActivity {
+public class HomepageActivity extends BaseMvpActivity {
 
     private Context mContext;
     private List<String> mTitles;
     private RecyclerView mRecyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
-        initData();
+    public int layoutId() {
+        return R.layout.activity_homepage;
     }
 
-    private void initView() {
-        mRecyclerView = findViewById(R.id.recycler_view);
+    @Override
+    public void initView() {
+        ViewDataBinding viewDataBinding = getDataBinding();
+        if (viewDataBinding != null){
+            ActivityHomepageBinding binding = (ActivityHomepageBinding) viewDataBinding;
+            mRecyclerView = binding.recyclerView;
+        }
     }
 
-    private void initData() {
+    @Override
+    public void initData() {
         mContext = HomepageActivity.this;
         mTitles = getTitles();
         Adapter adapter = new Adapter();
@@ -107,6 +111,5 @@ public class HomepageActivity extends AppCompatActivity {
             }
         }
     }
-
 
 }

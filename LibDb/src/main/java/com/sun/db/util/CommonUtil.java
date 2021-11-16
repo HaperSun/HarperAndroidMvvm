@@ -20,8 +20,6 @@ public class CommonUtil {
 
     /**
      * 判断安装的版本是不是debug版本 <br/>
-     * 作者 ：dengjie zhang <br/>
-     * created at 2016/4/7 16:17
      */
     public static boolean isApkDebugEnable() {
         try {

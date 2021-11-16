@@ -2,6 +2,7 @@ package com.sun.demo.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ViewDataBinding;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,15 +11,17 @@ import android.os.Bundle;
 import android.os.Message;
 import android.widget.TextView;
 
+import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.common.UiHandler;
 import com.sun.demo.R;
+import com.sun.demo.databinding.ActivityHandleBinding;
 
 /**
  * @author: Harper
  * @date: 2021/11/11
  * @note: handle的使用
  */
-public class HandleActivity extends AppCompatActivity {
+public class HandleActivity extends BaseMvpActivity {
 
     private final MyHandler mHandler = new MyHandler(this);
     @SuppressLint("StaticFieldLeak")
@@ -30,16 +33,27 @@ public class HandleActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_handle);
-        mTextView = findViewById(R.id.handle_text);
+    public void initView() {
+        ViewDataBinding viewDataBinding = getDataBinding();
+        if (viewDataBinding != null) {
+            ActivityHandleBinding binding = (ActivityHandleBinding) viewDataBinding;
+            mTextView = binding.handleText;
+        }
+    }
+
+    @Override
+    public void initData() {
         mHandler.post(mRunnable);
     }
 
     private final Runnable mRunnable = () -> {
         mHandler.sendEmptyMessageDelayed(0, 3000);
     };
+
+    @Override
+    public int layoutId() {
+        return R.layout.activity_handle;
+    }
 
     private static class MyHandler extends UiHandler<HandleActivity> {
 
