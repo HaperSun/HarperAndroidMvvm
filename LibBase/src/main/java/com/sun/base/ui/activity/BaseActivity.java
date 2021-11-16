@@ -1,6 +1,7 @@
 package com.sun.base.ui.activity;
 
 import androidx.fragment.app.FragmentManager;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,23 +10,30 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sun.base.helper.UIHelper;
 import com.sun.base.ui.IBaseActivity;
 import com.sun.base.ui.IBaseView;
 import com.sun.base.ui.widget.LoadingDialog;
 import com.sun.base.util.CommonUtils;
+import com.sun.common.toast.CustomToast;
+import com.sun.common.toast.ToastHelper;
 
 import org.greenrobot.eventbus.Subscribe;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
+/**
+ * @author: Harper
+ * @date: 2021/11/16
+ * @note: activity 的基类
+ */
 public abstract class BaseActivity extends AppCompatActivity implements IBaseView, IBaseActivity {
 
     protected final String TAG = this.getClass().getName();
@@ -36,7 +44,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     protected boolean needClickHideSoftInput = true;
 
-    // 一次性对象容器
+    /**
+     * 一次性对象容器
+     */
     private CompositeDisposable mCompositeDisposable;
 
     @Override
@@ -138,21 +148,21 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     public void showToast(int resId) {
         if (!isFinishing()) {
-            UIHelper.showToast(this, getString(resId));
+            ToastHelper.showCommonToast(this, getString(resId));
         }
     }
 
     @Override
     public void showToast(String msg) {
         if (!isFinishing()) {
-            UIHelper.showToast(this, msg);
+            ToastHelper.showCommonToast(this, msg);
         }
     }
 
     @Override
     public void showLongToast(String msg) {
         if (!isFinishing()) {
-            UIHelper.showLongToast(this, msg);
+            ToastHelper.showCommonToast(this, msg, Toast.LENGTH_LONG);
         }
     }
 
@@ -161,9 +171,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      *
      * @param resId
      */
-    public void showToastSucType(int resId) {
+    public void showToastSuccess(int resId) {
         if (!isFinishing()) {
-            UIHelper.showToast(this, getString(resId), true);
+            ToastHelper.showCustomToast(this, resId, CustomToast.CORRECT);
         }
     }
 
@@ -172,9 +182,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      *
      * @param msg
      */
-    public void showToastSucType(String msg) {
+    public void showToastSuccess(String msg) {
         if (!isFinishing()) {
-            UIHelper.showToast(this, msg, true);
+            ToastHelper.showCustomToast(this, msg, CustomToast.CORRECT);
         }
     }
 
@@ -183,9 +193,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      *
      * @param msg
      */
-    public void showLongToastSucType(String msg) {
+    public void showLongToastSuccess(String msg) {
         if (!isFinishing()) {
-            UIHelper.showLongToast(this, msg, true);
+            ToastHelper.showCustomToast(this, msg, CustomToast.CORRECT, Toast.LENGTH_LONG);
         }
     }
 

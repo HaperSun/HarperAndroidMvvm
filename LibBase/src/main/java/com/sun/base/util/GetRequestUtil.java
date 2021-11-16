@@ -57,7 +57,7 @@ public class GetRequestUtil {
                 }
             }
         }
-        MyLogUtil.d("object_params", object == null ? "" : object.toString());
+        LogUtil.d("object_params", object == null ? "" : object.toString());
         return object;
     }
 
@@ -74,7 +74,7 @@ public class GetRequestUtil {
                 }
             }
         }
-        MyLogUtil.d("object_params", object == null ? "" : object.toString());
+        LogUtil.d("object_params", object == null ? "" : object.toString());
         return RequestBody.create(MediaType.parse("application/json"), object.toString());
     }
 

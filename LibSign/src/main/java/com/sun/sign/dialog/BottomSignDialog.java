@@ -10,8 +10,8 @@ import android.view.Window;
 import android.widget.TextView;
 
 
+import com.sun.common.toast.ToastHelper;
 import com.sun.sign.R;
-import com.sun.sign.util.ToastHelp;
 import com.sun.sign.widget.SignatureInputView;
 
 import java.io.File;
@@ -61,7 +61,7 @@ public class BottomSignDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.tv_ok) {
             if (!mSignatureInputView.isSignatureInputAvailable()) {
-                ToastHelp.show(mContext, "请签名！");
+                ToastHelper.showCommonToast(mContext, "请签名！");
                 return;
             }
             try {

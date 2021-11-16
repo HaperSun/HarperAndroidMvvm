@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.sun.base.net.annotation.IgnoreIfNullOrEmpty;
 import com.sun.base.net.annotation.Key;
-import com.sun.base.util.MyLogUtil;
+import com.sun.base.util.LogUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -58,7 +58,7 @@ public class BaseRequest {
                     params.put(key, "");
                 }
             } catch (IllegalAccessException e) {
-                MyLogUtil.e(getClass().getName(), "IllegalAccessException", e);
+                LogUtil.e(getClass().getName(), "IllegalAccessException", e);
             }
         }
         return params;

@@ -99,7 +99,7 @@ public class FileUtil {
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();
-                MyLogUtil.d("saveStrToFile", e.getMessage());
+                LogUtil.d("saveStrToFile", e.getMessage());
             }
         }
         return false;
@@ -411,7 +411,7 @@ public class FileUtil {
                 closeable.close();
             }
         } catch (IOException e) {
-            MyLogUtil.e(TAG, "close closeable exception", e);
+            LogUtil.e(TAG, "close closeable exception", e);
         }
     }
 
@@ -487,7 +487,7 @@ public class FileUtil {
             //使用系统API，获取MimeTypeMap的单例实例，然后调用其内部方法获取文件后缀名（扩展名）所对应的MIME类型
             mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
         }
-        MyLogUtil.i(TAG, "filePathOrUrl-->" + filePathOrUrl + "的系统定义的MIME类型为：" + mimeType);
+        LogUtil.i(TAG, "filePathOrUrl-->" + filePathOrUrl + "的系统定义的MIME类型为：" + mimeType);
         return mimeType;
     }
 

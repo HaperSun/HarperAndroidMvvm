@@ -11,7 +11,6 @@ import com.orhanobut.logger.LogStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.sun.base.bean.DiskLogHandler;
-import com.sun.base.bean.LogLevel;
 
 
 /**
@@ -19,16 +18,16 @@ import com.sun.base.bean.LogLevel;
  * @date: 2021/11/12
  * @note: 自定义 打印日志工具
  */
-public final class MyLogUtil {
+public final class LogUtil {
     /**
      * 默认日志tag <br/>
      */
-    private static final String TAG = "MyLogUtil";
+    private static final String TAG = "LogUtil";
 
     /**
      * 默认提供打印服务
      */
-    private static boolean mIsAbleLog = true;
+    private static boolean mIsEnableLog = true;
 
     public static final int V = 0;
     public static final int I = 1;
@@ -38,53 +37,6 @@ public final class MyLogUtil {
 
     private static int logLevel = V;
 
-    public static void log(LogLevel level, String tag, String message) {
-        switch (level.ordinal()) {
-            case V:
-                v(tag, message);
-                break;
-            case I:
-                i(tag, message);
-                break;
-            case D:
-                d(tag, message);
-                break;
-            case W:
-                w(tag, message);
-                break;
-            case E:
-                e(tag, message);
-                break;
-            default:
-                d(tag, message);
-                break;
-        }
-    }
-
-
-    public static void log(LogLevel level, String message) {
-        switch (level.ordinal()) {
-            case V:
-                v(message);
-                break;
-            case I:
-                i(message);
-                break;
-            case D:
-                d(message);
-                break;
-            case W:
-                w(message);
-                break;
-            case E:
-                e(message);
-                break;
-            default:
-                d(message);
-                break;
-        }
-    }
-
     /**
      * 打印 verbose级别
      *
@@ -93,11 +45,11 @@ public final class MyLogUtil {
      */
     public static void v(String tag, String msg) {
         try {
-            if (mIsAbleLog && logLevel < V) {
+            if (mIsEnableLog && logLevel < V) {
                 Logger.t(tag).v(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -108,11 +60,11 @@ public final class MyLogUtil {
      */
     public static void v(String msg) {
         try {
-            if (mIsAbleLog && logLevel < V) {
+            if (mIsEnableLog && logLevel < V) {
                 Logger.v(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -124,22 +76,22 @@ public final class MyLogUtil {
      */
     public static void i(String tag, String msg) {
         try {
-            if (mIsAbleLog && logLevel < I) {
+            if (mIsEnableLog && logLevel < I) {
                 Logger.t(tag).i(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
     }
 
     public static void i(String msg) {
         try {
-            if (mIsAbleLog && logLevel < I) {
+            if (mIsEnableLog && logLevel < I) {
                 Logger.i(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -151,11 +103,11 @@ public final class MyLogUtil {
      */
     public static void d(String tag, String msg) {
         try {
-            if (mIsAbleLog && logLevel < D) {
+            if (mIsEnableLog && logLevel < D) {
                 Logger.t(tag).d(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -166,11 +118,11 @@ public final class MyLogUtil {
      */
     public static void d(String msg) {
         try {
-            if (mIsAbleLog && logLevel < D) {
+            if (mIsEnableLog && logLevel < D) {
                 Logger.d(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -182,11 +134,11 @@ public final class MyLogUtil {
      */
     public static void w(String tag, String msg) {
         try {
-            if (mIsAbleLog && logLevel < W) {
+            if (mIsEnableLog && logLevel < W) {
                 Logger.t(tag).w(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -197,11 +149,11 @@ public final class MyLogUtil {
      */
     public static void w(String msg) {
         try {
-            if (mIsAbleLog && logLevel < W) {
+            if (mIsEnableLog && logLevel < W) {
                 Logger.w(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -212,7 +164,7 @@ public final class MyLogUtil {
      * @param msg
      */
     public static void w(String tag, String msg, Throwable e) {
-        if (mIsAbleLog && logLevel < W) {
+        if (mIsEnableLog && logLevel < W) {
             Logger.t(tag).e(e, msg);
         }
     }
@@ -226,11 +178,11 @@ public final class MyLogUtil {
      */
     public static void e(String tag, String msg) {
         try {
-            if (mIsAbleLog && logLevel < E) {
+            if (mIsEnableLog && logLevel < E) {
                 Logger.t(tag).e(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -241,11 +193,11 @@ public final class MyLogUtil {
      */
     public static void e(String msg) {
         try {
-            if (mIsAbleLog && logLevel < E) {
+            if (mIsEnableLog && logLevel < E) {
                 Logger.e(msg);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -257,19 +209,19 @@ public final class MyLogUtil {
      * @param e
      */
     public static void e(String tag, String msg, Throwable e) {
-        if (mIsAbleLog && logLevel < E) {
+        if (mIsEnableLog && logLevel < E) {
             Logger.t(tag).e(e, msg);
         }
     }
 
     public static void json(String tag, String msg) {
-        if (mIsAbleLog && logLevel < D) {
+        if (mIsEnableLog && logLevel < D) {
             Logger.t(tag).json(msg);
         }
     }
 
     public static void json(String msg) {
-        if (mIsAbleLog && logLevel < D) {
+        if (mIsEnableLog && logLevel < D) {
             Logger.json(msg);
         }
     }
@@ -284,32 +236,36 @@ public final class MyLogUtil {
     }
 
     /**
-     * 初始化
+     * 需要在Application中初始化
      *
-     * @param context
+     * @param applicationContext applicationContext
      */
-    public static void init(Context context, final boolean isEnableAndroidLog) {
-        setAndroidLog(isEnableAndroidLog);
-        setDiskLog(context);
+    public static void init(Context applicationContext, boolean isEnableLog) {
+        mIsEnableLog = isEnableLog;
+        setAndroidLog();
+        setDiskLog(applicationContext);
     }
 
     /**
      * 设置打印日志到Android控制台（Console）
-     *
-     * @param isEnableAndroidLog 是否开启
      */
-    private static void setAndroidLog(final boolean isEnableAndroidLog) {
+    private static void setAndroidLog() {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
-                .methodCount(0)         // (Optional) How many method line to show. Default 2
-                .methodOffset(7)        // (Optional) Hides internal method calls up to offset. Default 5
-//                    .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
-                .tag(TAG)   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .showThreadInfo(false)
+                // (Optional) Whether to show thread info or not. Default true
+                .methodCount(0)
+                // (Optional) How many method line to show. Default 2
+                .methodOffset(7)
+                // (Optional) Hides internal method calls up to offset. Default 5
+//                    .logStrategy(customLog)
+                // (Optional) Changes the log strategy to print out. Default LogCat
+                .tag(TAG)
+                // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
             @Override
             public boolean isLoggable(int priority, String tag) {
-                return isEnableAndroidLog;
+                return mIsEnableLog;
             }
         });
     }
@@ -317,12 +273,12 @@ public final class MyLogUtil {
     /**
      * 设置打印日志到本地
      *
-     * @param appContext
+     * @param applicationContext
      */
-    private static void setDiskLog(Context appContext) {
+    private static void setDiskLog(Context applicationContext) {
         //添加日志输出到本地功能
         // 日志输出文件夹路径
-        String logFolderPath = FileUtil.getExternalFilesDir(appContext, DiskLogHandler.DEFAULT_LOG_DIR_NAME)
+        String logFolderPath = FileUtil.getExternalFilesDir(applicationContext, DiskLogHandler.DEFAULT_LOG_DIR_NAME)
                 .getAbsolutePath();
         //单个日志文件最大大小
         long maxPerLogFileSize = DiskLogHandler.DEFAULT_MAX_FILE_BYTES;

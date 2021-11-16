@@ -5,6 +5,7 @@ import android.app.Application;
 import com.sun.base.bean.TDevice;
 import com.sun.base.net.NetWork;
 import com.sun.base.net.NetWorks;
+import com.sun.base.util.LogUtil;
 import com.sun.base.util.RetrofitUtils;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
@@ -26,6 +27,8 @@ public class MainApplication extends Application implements UserInfoManager.OnUp
         NetWorks.init(this);
         NetWork.init(this);
         RetrofitUtils.initRetrofit(this);
+        LogUtil.init(this, BuildConfig.DEBUG
+                || getResources().getBoolean(R.bool.isTest));
     }
 
     @Override

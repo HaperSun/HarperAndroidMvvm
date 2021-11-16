@@ -5,10 +5,10 @@ import androidx.databinding.ViewDataBinding;
 import android.content.Context;
 import android.content.Intent;
 
-import com.sun.base.helper.ToastHelper;
+import com.sun.common.toast.ToastHelper;
 import com.sun.base.net.exception.ApiException;
 import com.sun.base.ui.activity.BaseMvpActivity;
-import com.sun.base.ui.widget.CommonToast;
+import com.sun.common.toast.CustomToast;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
 import com.sun.demo.R;
@@ -16,7 +16,6 @@ import com.sun.demo.databinding.ActivityLoginBinding;
 import com.sun.demo.iview.LoginView;
 import com.sun.demo.model.response.LoginResponse;
 import com.sun.demo.present.LoginPresenter;
-import com.sun.sign.util.ToastHelp;
 
 /**
  * @author: Harper
@@ -43,6 +42,8 @@ public class LoginActivity extends BaseMvpActivity implements LoginView {
         if (viewDataBinding != null) {
             ActivityLoginBinding binding = (ActivityLoginBinding) viewDataBinding;
             binding.login.setOnClickListener(v -> doLogin());
+            binding.commonToast.setOnClickListener(v -> ToastHelper.showCommonToast(this, R.string.copy_success));
+            binding.customToast.setOnClickListener(v -> ToastHelper.showCustomToast(this, R.string.copy_success));
         }
     }
 
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginView {
                 //陆成功后保存数据到历史记录中去
                 UserInfo userInfo = new UserInfo(object.userName, object.password, object.token, object.id, UserInfo.LoginState.LOGIN);
                 UserInfoManager.getInstance(this).loginAndSaveUserInfo(userInfo);
-                ToastHelper.showCommonToast(this, "登陆成功", CommonToast.TYPE_CORRECT);
+                ToastHelper.showCustomToast(this, "登陆成功", CustomToast.CORRECT);
             }
         }
     }

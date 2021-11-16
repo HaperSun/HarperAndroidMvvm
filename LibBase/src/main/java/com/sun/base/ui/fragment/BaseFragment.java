@@ -137,7 +137,7 @@ public abstract class BaseFragment extends ResolveShowBugDialogFragment implemen
         if (getStatus()) {
             BaseActivity activity = getBaseActivity();
             if (activity != null) {
-                activity.showToastSucType(resId);
+                activity.showToastSuccess(resId);
             }
         }
     }
@@ -151,7 +151,7 @@ public abstract class BaseFragment extends ResolveShowBugDialogFragment implemen
         if (getStatus()) {
             BaseActivity activity = getBaseActivity();
             if (activity != null) {
-                activity.showToastSucType(msg);
+                activity.showToastSuccess(msg);
             }
         }
     }
@@ -165,7 +165,7 @@ public abstract class BaseFragment extends ResolveShowBugDialogFragment implemen
         if (getStatus()) {
             BaseActivity activity = getBaseActivity();
             if (activity != null) {
-                activity.showLongToastSucType(msg);
+                activity.showLongToastSuccess(msg);
             }
         }
     }

@@ -40,11 +40,11 @@ config.data_embed_point = isTestApi
 //关于服务端的地址配置
 def server = [:]
 //测试环境
-server.testUrl = "https://地址前缀"
+server.testUrl = "https://sit.fxgkpt.com"
 //准现网环境
-server.devUrl = "https://地址前缀"
+server.devUrl = "https://sit.fxgkpt.com"
 //现网环境
-server.formalUrl = "https://地址前缀"
+server.formalUrl = "https://www.fxgkpt.com"
 switch (environment) {
     case Environment.TEST:
         server.finalUrl = server.testUrl

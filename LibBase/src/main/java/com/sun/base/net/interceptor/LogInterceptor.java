@@ -1,7 +1,9 @@
 package com.sun.base.net.interceptor;
 
 
-import com.sun.base.util.MyLogUtil;
+import android.text.TextUtils;
+
+import com.sun.base.util.LogUtil;
 
 import java.io.IOException;
 
@@ -15,7 +17,7 @@ import okhttp3.ResponseBody;
 
 /**
  * @author: Harper
- * @date:   2021/11/12
+ * @date: 2021/11/12
  * @note:
  */
 
@@ -31,11 +33,9 @@ public class LogInterceptor implements Interceptor {
         //为了方便，将POST请求体参数也拼到url后面打印出来
         StringBuilder fullUrl = new StringBuilder();
         fullUrl.append(url).append("?");
-        //为了打印POST的表单请求参数
-        boolean isPost = false;
         RequestBody requestBody = request.body();
         if (requestBody instanceof FormBody) {
-            isPost = true;
+            //为了打印POST的表单请求参数
             StringBuilder sb = new StringBuilder();
             FormBody formBody = (FormBody) requestBody;
             int size = formBody.size();
@@ -43,7 +43,7 @@ public class LogInterceptor implements Interceptor {
                 String name = formBody.encodedName(i);
                 String value = formBody.encodedValue(i);
                 fullUrl.append(name).append("=").append(value);
-                if(i < size - 1){
+                if (i < size - 1) {
                     fullUrl.append("&");
                 }
                 sb.append(name).append("=").append(value).append(",");
@@ -52,34 +52,26 @@ public class LogInterceptor implements Interceptor {
             if (length > 0) {
                 sb.delete(length - 1, length);
             }
-            MyLogUtil.d("Http", "| RequestParams:{" + sb.toString() + "}");
-            MyLogUtil.d("Http", fullUrl.toString());
-        }
-        if (!isPost) {
-            MyLogUtil.d("Http", url);
+            LogUtil.d("Http", "| RequestParams:{" + sb.toString() + "}");
+            LogUtil.d("Http", fullUrl.toString());
         }
         Headers headers = request.headers();
-        if (headers != null) {
-            int size = headers.size();
-            StringBuilder headerSb = new StringBuilder();
-            for (int i = 0; i < size; i++) {
-                headerSb.append(headers.name(i)).append("=").append(headers.value(i));
-                if (i < size - 1) {
-                    headerSb.append("&");
-                }
+        int size = headers.size();
+        StringBuilder headerSb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            headerSb.append(headers.name(i)).append("=").append(headers.value(i));
+            if (i < size - 1) {
+                headerSb.append("&");
             }
-            MyLogUtil.d("Http", url + " header-->" + headerSb);
         }
+        LogUtil.d("Http", url + " header-->" + headerSb);
         Response response = chain.proceed(request);
         ResponseBody responseBody = response.body();
+        assert responseBody != null;
         okhttp3.MediaType mediaType = responseBody.contentType();
         String content = responseBody.string();
-
-        if (responseBody == null) {
-            MyLogUtil.d("Http", url + " 返回结果为空");
-        } else {
-            MyLogUtil.d("Http", url + " " + content);
-        }
+        content = TextUtils.isEmpty(content) ? " 返回结果为空" : content;
+        LogUtil.d("Http", url + content);
         return response
                 .newBuilder()
                 .body(ResponseBody.create(mediaType, content))

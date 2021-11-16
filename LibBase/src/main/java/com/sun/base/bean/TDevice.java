@@ -46,7 +46,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
 
 import com.sun.base.R;
-import com.sun.base.util.MyLogUtil;
+import com.sun.base.util.LogUtil;
 import com.sun.base.util.StringUtils;
 import com.sun.base.util.ToastUtil;
 
@@ -157,7 +157,7 @@ public class TDevice {
                 screenHeight = (Integer) Display.class
                         .getMethod("getRawHeight").invoke(d);
             } catch (Exception ignored) {
-                MyLogUtil.e(TAG, "getRawWidth or getRawHeight exception", ignored);
+                LogUtil.e(TAG, "getRawWidth or getRawHeight exception", ignored);
             }
         }
         // includes window decorations (statusbar bar/menu bar)
@@ -169,7 +169,7 @@ public class TDevice {
                 screenWidth = realSize.x;
                 screenHeight = realSize.y;
             } catch (Exception ignored) {
-                MyLogUtil.e(TAG, "getRealSize exception", ignored);
+                LogUtil.e(TAG, "getRealSize exception", ignored);
             }
         }
         size[0] = screenWidth;
@@ -251,7 +251,7 @@ public class TDevice {
                 return true;
             }
         } catch (NameNotFoundException e) {
-            MyLogUtil.e(e.getMessage());
+            LogUtil.e(e.getMessage());
         }
         return false;
     }
@@ -389,7 +389,7 @@ public class TDevice {
                             Uri.parse(otherMarketUri));
                     context.startActivity(intent);
                 } catch (Exception e) {
-                    MyLogUtil.e(TAG, "openAppInMarket exception", e);
+                    LogUtil.e(TAG, "openAppInMarket exception", e);
                 }
             }
         }
@@ -418,7 +418,7 @@ public class TDevice {
             return mContext.getPackageManager()
                     .getPackageInfo(pckName, 0);
         } catch (NameNotFoundException e) {
-            MyLogUtil.e(e.getMessage());
+            LogUtil.e(e.getMessage());
         }
         return null;
     }
@@ -526,7 +526,7 @@ public class TDevice {
              */
             context.startActivity(intent);
         } catch (Exception e) {
-            MyLogUtil.e(TAG, "installAPK Exception", e);
+            LogUtil.e(TAG, "installAPK Exception", e);
             //兼容8.0的逻辑放在这里面，因为context.getPackageManager().canRequestPackageInstalls()这个判断在很多国产ROM里面始终返回为false即使允许了。。。
             //比如华为或小米或Oppo的部分设备
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -665,7 +665,7 @@ public class TDevice {
             }
             strMacAddr = buffer.toString().toUpperCase();
         } catch (Exception e) {
-            MyLogUtil.e(TAG, "getLocalMacAddressFromIp exception", e);
+            LogUtil.e(TAG, "getLocalMacAddressFromIp exception", e);
         }
         return strMacAddr;
     }
@@ -696,7 +696,7 @@ public class TDevice {
                 }
             }
         } catch (SocketException e) {
-            MyLogUtil.e(TAG, "getLocalInetAddress exception", e);
+            LogUtil.e(TAG, "getLocalInetAddress exception", e);
         }
         return ip;
     }
@@ -728,7 +728,7 @@ public class TDevice {
                 return res1.toString();
             }
         } catch (Exception ex) {
-            MyLogUtil.e(TAG, "getMacWithNetworkInterface exception", ex);
+            LogUtil.e(TAG, "getMacWithNetworkInterface exception", ex);
         }
         return null;
     }
@@ -799,7 +799,7 @@ public class TDevice {
         if (mainIntent == null) {
             mainIntent = new Intent(packageName);
         } else {
-            MyLogUtil.i("Action:" + mainIntent.getAction());
+            LogUtil.i("Action:" + mainIntent.getAction());
         }
         context.startActivity(mainIntent);
     }
