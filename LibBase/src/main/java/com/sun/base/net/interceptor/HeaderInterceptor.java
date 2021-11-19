@@ -3,7 +3,7 @@ package com.sun.base.net.interceptor;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.sun.common.Const;
+import com.sun.base.R;
 
 import java.io.IOException;
 
@@ -29,11 +29,6 @@ public class HeaderInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
-
-//        String authorization = UserInfoManager.getInstance(mContext) != null
-//                && UserInfoManager.getInstance(mContext).getCurrentLoginUser() != null ?
-//                "Bearer " + UserInfoManager.getInstance(mContext).getCurrentLoginUser().getAccess_token() : "";
-        // Request customization: add request headers
         SharedPreferences sp = mContext.getSharedPreferences("um_push", MODE_PRIVATE);
         String deviceToken = sp.getString("deviceToken", "");
         assert deviceToken != null;
@@ -42,7 +37,7 @@ public class HeaderInterceptor implements Interceptor {
                 .addHeader("deviceToken", deviceToken)
                 .addHeader("client", "android")
                 .addHeader("deviceType", "android")
-                .addHeader("appVersion", Const.APP_VERSION + "");
+                .addHeader("appVersion", mContext.getResources().getString(R.string.version_name) + "");
         ;
 
         return chain.proceed(requestBuilder.build());

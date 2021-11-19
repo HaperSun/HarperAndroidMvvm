@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.sun.base.ui.activity.BaseMvpActivity;
+import com.sun.demo.BuildConfig;
 import com.sun.demo.R;
 import com.sun.demo.databinding.ActivitySignBinding;
 
@@ -39,6 +40,6 @@ public class SignActivity extends BaseMvpActivity {
 
     @Override
     public void initData() {
-
+//        BuildConfig.DEBUG
     }
 }

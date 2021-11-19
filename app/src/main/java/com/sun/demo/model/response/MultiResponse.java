@@ -44,7 +44,7 @@ public class MultiResponse {
             if (i % 2 == 0) {
                 responses.add(new MultiResponse(0, "我是MultiType的第" + i + "条"));
             } else {
-                responses.add(new MultiResponse(1, R.mipmap.ic_launcher_round));
+                responses.add(new MultiResponse(1, R.mipmap.app_logo));
             }
         }
         return responses;

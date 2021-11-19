@@ -1,6 +1,7 @@
 package com.sun.demo;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.sun.base.bean.TDevice;
 import com.sun.base.net.NetWork;
@@ -9,6 +10,7 @@ import com.sun.base.util.LogUtil;
 import com.sun.base.util.RetrofitUtils;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
+import com.umeng.commonsdk.UMConfigure;
 
 /**
  * @author Harper
@@ -23,12 +25,16 @@ public class MainApplication extends Application implements UserInfoManager.OnUp
     @Override
     public void onCreate() {
         super.onCreate();
-        TDevice.initTDevice(this);
-        NetWorks.init(this);
-        NetWork.init(this);
-        RetrofitUtils.initRetrofit(this);
-        LogUtil.init(this, BuildConfig.DEBUG
-                || getResources().getBoolean(R.bool.isTest));
+        Context context = MainApplication.this;
+        TDevice.initTDevice(context);
+        NetWorks.init(context);
+        NetWork.init(context);
+        RetrofitUtils.initRetrofit(context);
+        //初始化LogUtil
+        LogUtil.init(context, LogUtil.ALL);
+        //初始化友盟SDK
+        String umAppKey = context.getResources().getString(R.string.um_app_key);
+        UMConfigure.init(this, umAppKey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
     }
 
     @Override

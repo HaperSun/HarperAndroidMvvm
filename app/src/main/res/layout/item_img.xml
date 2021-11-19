@@ -4,4 +4,4 @@
     android:id="@+id/item_img"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_80"
-    android:src="@mipmap/ic_launcher" />
+    android:src="@mipmap/app_logo" />

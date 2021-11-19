@@ -5,25 +5,21 @@ def config = [:]
 //定义当前环境类型
 enum Environment {
     TEST, //测试环境
-    DEVELOPMENT, //开发环境
-    RELEASE //正式环境
+    DEVELOPMENT, //模拟现网环境
+    RELEASE //现网环境
 }
-//当前环境类型 ENVIRONMENT，发布正式版本的时候请将这个改为 Environment.RELEASE !!!!!
+//通过在gradle.properties文件中配置的ENVIRONMENT来实现网络环境的切换!!!
+// 也可以在此处直接切换，如：将 ENVIRONMENT 改成 Environment.RELEASE 就变成现网环境了!!!
 Environment environment = ENVIRONMENT
 
 //是否是测试环境，只要不是正式环境就认为是测试环境 (请注意这个测试环境和上面定义的开发环境类型中的测试环境是两个概念)
 def isTestApi = environment != Environment.RELEASE
-def releaseTimeStr = releaseTime()
-
-def releaseTime() {
-    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC")).toString() + DALIY_VERSION
-}
 
 def app = [:]
-app.versionCode = isTestApi ? Integer.parseInt(releaseTimeStr) : Integer.parseInt(VERSION_CODE)
-app.versionName = isTestApi ? releaseTimeStr : RELEASE_VERSION
-//友盟的app_key
-app.umeng_app_key = "5f03cead570df339ae000132"
+app.versionCode = isTestApi ? Integer.parseInt(VERSION_CODE + DALIY_VERSION) : Integer.parseInt(VERSION_CODE)
+app.versionName = VERSION_NAME
+//友盟的 app_key
+app.umeng_app_key = "6193821ce014255fcb7d1395"
 config.app = app
 
 //关于H5页面的url前缀的一些配置
@@ -57,5 +53,12 @@ switch (environment) {
         break
 }
 config.server = server
+
+//GreenDao版本
+config.dao_version = Integer.parseInt(DAO_VERSION)
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC")).toString() + DALIY_VERSION
+}
 
 ext.config = config

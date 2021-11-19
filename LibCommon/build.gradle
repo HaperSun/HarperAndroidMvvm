@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion build_version.min_sdk
         targetSdkVersion build_version.target_sdk
-        versionCode 1
-        versionName "1.0"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -20,9 +18,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    /*读取config.gradle中的配置文件，在build后生成xml的资源文件*/
+    buildTypes.all{ buildType ->
+        //友盟appKey
+        resValue("string", "version_name", config.app.versionName)
+        boolean isTestApi = config.isTestApi
+        //服务端地址
+        resValue("string", "server_url", config.server.finalUrl)
+        //是否是测试环境（只要不是release环境都被认为是测试环境）
+        resValue("bool", "isTest", isTestApi ? "true" : "false")
+        //友盟appKey
+        resValue("string", "um_app_key", config.app.umeng_app_key)
+    }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility build_version.version_java
+        targetCompatibility build_version.version_java
     }
 }
 

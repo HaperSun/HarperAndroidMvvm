@@ -41,6 +41,5 @@ build_version.compile_sdk = 30
 build_version.build_tools = "30.0.3"
 build_version.min_sdk = 16
 build_version.target_sdk = 30
-build_version.version_code = 1
-build_version.version_name = "1.0"
+build_version.version_java = JavaVersion.VERSION_1_8
 ext.build_version = build_version

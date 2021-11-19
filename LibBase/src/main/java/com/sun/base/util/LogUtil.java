@@ -10,6 +10,7 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.LogStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.sun.base.R;
 import com.sun.base.bean.DiskLogHandler;
 
 
@@ -27,15 +28,17 @@ public final class LogUtil {
     /**
      * 默认提供打印服务
      */
-    private static boolean mIsEnableLog = true;
+    private static boolean mEnableLog = false;
 
-    public static final int V = 0;
-    public static final int I = 1;
-    public static final int D = 2;
-    public static final int W = 3;
-    public static final int E = 4;
 
-    private static int logLevel = V;
+    public static final int V = 1;
+    public static final int I = 2;
+    public static final int D = 3;
+    public static final int W = 4;
+    public static final int E = 5;
+    public static final int ALL = 6;
+
+    private static int mLogLevel = ALL;
 
     /**
      * 打印 verbose级别
@@ -45,7 +48,7 @@ public final class LogUtil {
      */
     public static void v(String tag, String msg) {
         try {
-            if (mIsEnableLog && logLevel < V) {
+            if (mEnableLog && mLogLevel <= V) {
                 Logger.t(tag).v(msg);
             }
         } catch (Exception e) {
@@ -60,7 +63,7 @@ public final class LogUtil {
      */
     public static void v(String msg) {
         try {
-            if (mIsEnableLog && logLevel < V) {
+            if (mEnableLog && mLogLevel <= V) {
                 Logger.v(msg);
             }
         } catch (Exception e) {
@@ -76,7 +79,7 @@ public final class LogUtil {
      */
     public static void i(String tag, String msg) {
         try {
-            if (mIsEnableLog && logLevel < I) {
+            if (mEnableLog && mLogLevel <= I) {
                 Logger.t(tag).i(msg);
             }
         } catch (Exception e) {
@@ -87,7 +90,7 @@ public final class LogUtil {
 
     public static void i(String msg) {
         try {
-            if (mIsEnableLog && logLevel < I) {
+            if (mEnableLog && mLogLevel <= I) {
                 Logger.i(msg);
             }
         } catch (Exception e) {
@@ -103,7 +106,7 @@ public final class LogUtil {
      */
     public static void d(String tag, String msg) {
         try {
-            if (mIsEnableLog && logLevel < D) {
+            if (mEnableLog && mLogLevel == D) {
                 Logger.t(tag).d(msg);
             }
         } catch (Exception e) {
@@ -118,7 +121,7 @@ public final class LogUtil {
      */
     public static void d(String msg) {
         try {
-            if (mIsEnableLog && logLevel < D) {
+            if (mEnableLog && mLogLevel == D) {
                 Logger.d(msg);
             }
         } catch (Exception e) {
@@ -134,7 +137,7 @@ public final class LogUtil {
      */
     public static void w(String tag, String msg) {
         try {
-            if (mIsEnableLog && logLevel < W) {
+            if (mEnableLog && mLogLevel <= W) {
                 Logger.t(tag).w(msg);
             }
         } catch (Exception e) {
@@ -149,7 +152,7 @@ public final class LogUtil {
      */
     public static void w(String msg) {
         try {
-            if (mIsEnableLog && logLevel < W) {
+            if (mEnableLog && mLogLevel <= W) {
                 Logger.w(msg);
             }
         } catch (Exception e) {
@@ -164,7 +167,7 @@ public final class LogUtil {
      * @param msg
      */
     public static void w(String tag, String msg, Throwable e) {
-        if (mIsEnableLog && logLevel < W) {
+        if (mEnableLog && mLogLevel <= W) {
             Logger.t(tag).e(e, msg);
         }
     }
@@ -178,7 +181,7 @@ public final class LogUtil {
      */
     public static void e(String tag, String msg) {
         try {
-            if (mIsEnableLog && logLevel < E) {
+            if (mEnableLog && mLogLevel <= E) {
                 Logger.t(tag).e(msg);
             }
         } catch (Exception e) {
@@ -193,7 +196,7 @@ public final class LogUtil {
      */
     public static void e(String msg) {
         try {
-            if (mIsEnableLog && logLevel < E) {
+            if (mEnableLog && mLogLevel <= E) {
                 Logger.e(msg);
             }
         } catch (Exception e) {
@@ -209,19 +212,19 @@ public final class LogUtil {
      * @param e
      */
     public static void e(String tag, String msg, Throwable e) {
-        if (mIsEnableLog && logLevel < E) {
+        if (mEnableLog && mLogLevel <= E) {
             Logger.t(tag).e(e, msg);
         }
     }
 
     public static void json(String tag, String msg) {
-        if (mIsEnableLog && logLevel < D) {
+        if (mEnableLog && mLogLevel <= D) {
             Logger.t(tag).json(msg);
         }
     }
 
     public static void json(String msg) {
-        if (mIsEnableLog && logLevel < D) {
+        if (mEnableLog && mLogLevel <= D) {
             Logger.json(msg);
         }
     }
@@ -229,10 +232,10 @@ public final class LogUtil {
     /**
      * 设置打印等级
      *
-     * @param level
+     * @param level 级别
      */
     public static void setLogLevel(int level) {
-        logLevel = level;
+        mLogLevel = level;
     }
 
     /**
@@ -240,8 +243,9 @@ public final class LogUtil {
      *
      * @param applicationContext applicationContext
      */
-    public static void init(Context applicationContext, boolean isEnableLog) {
-        mIsEnableLog = isEnableLog;
+    public static void init(Context applicationContext, int logLevel) {
+        mEnableLog = applicationContext.getResources().getBoolean(R.bool.isTest);
+        mLogLevel = logLevel;
         setAndroidLog();
         setDiskLog(applicationContext);
     }
@@ -265,7 +269,7 @@ public final class LogUtil {
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
             @Override
             public boolean isLoggable(int priority, String tag) {
-                return mIsEnableLog;
+                return mEnableLog;
             }
         });
     }
