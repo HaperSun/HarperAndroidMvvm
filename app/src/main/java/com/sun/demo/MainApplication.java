@@ -10,6 +10,7 @@ import com.sun.base.util.LogUtil;
 import com.sun.base.util.RetrofitUtils;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
+import com.tencent.smtt.sdk.QbSdk;
 import com.umeng.commonsdk.UMConfigure;
 
 /**
@@ -35,6 +36,21 @@ public class MainApplication extends Application implements UserInfoManager.OnUp
         //初始化友盟SDK
         String umAppKey = context.getResources().getString(R.string.um_app_key);
         UMConfigure.init(this, umAppKey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        initX5();
+    }
+
+    private void initX5() {
+        QbSdk.initX5Environment(MainApplication.this, new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+
+            }
+        });
     }
 
     @Override

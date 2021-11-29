@@ -19,8 +19,6 @@ android {
         }
     }
 
-
-
     compileOptions {
         sourceCompatibility build_version.version_java
         targetCompatibility build_version.version_java

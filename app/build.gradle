@@ -16,6 +16,8 @@ android {
                 //友盟
                 UMENG_APP_KEY: config.app.umeng_app_key
         ]
+
+        ndk{abiFilters "armeabi"}
     }
 
     buildTypes {
@@ -52,5 +54,7 @@ dependencies {
     implementation 'com.umeng.umsdk:common:9.4.4' // (必选)版本号
     implementation 'com.umeng.umsdk:asms:1.4.1' // asms包依赖(必选)
     implementation 'com.umeng.umsdk:share-wx:7.1.6' //微信完整版
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'//微信官方依赖库，必选
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+    implementation files('libs\\tbs_sdk_thirdapp_v4.3.0.215_44115_sharewithdownloadwithfile_withoutGame_obfs_20211019_111112.jar')
+//微信官方依赖库，必选
 }

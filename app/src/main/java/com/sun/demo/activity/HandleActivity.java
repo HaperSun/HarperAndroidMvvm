@@ -1,15 +1,13 @@
 package com.sun.demo.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.ViewDataBinding;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Message;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.ViewDataBinding;
 
 import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.common.UiHandler;

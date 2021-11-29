@@ -1,14 +1,14 @@
 package com.sun.demo.activity;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.demo.R;
@@ -56,6 +56,7 @@ public class HomepageActivity extends BaseMvpActivity {
         titles.add("一个模拟签名的实例");
         titles.add("handle的封装与使用");
         titles.add("复杂的列表视图新写法MultiType");
+        titles.add("带选择的 recyclerView");
         return titles;
     }
 
@@ -90,6 +91,9 @@ public class HomepageActivity extends BaseMvpActivity {
                     break;
                 case 3:
                     MultiTypeRecyclerViewActivity.startActivity(mContext);
+                    break;
+                case 4:
+                    RecyclerViewItemSelectActivity.startActivity(mContext);
                     break;
                 default:
                     break;
