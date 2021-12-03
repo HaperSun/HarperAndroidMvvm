@@ -6,11 +6,20 @@ package com.sun.base.ui;
  * @note:
  */
 public interface IBaseFragment {
+    /**
+     * 获取布局id
+     *
+     * @return id
+     */
     int layoutId();
 
-    void initData();
-
+    /**
+     * 初始化view
+     */
     void initView();
 
-    void initEvent();
+    /**
+     * 初始化数据
+     */
+    void initData();
 }

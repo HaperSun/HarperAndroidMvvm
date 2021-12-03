@@ -3,7 +3,6 @@ package com.sun.demo.activity;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sun.base.ui.activity.BaseMvpActivity;
@@ -16,7 +15,8 @@ import com.sun.demo.model.SelectItemBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewItemSelectActivity extends BaseMvpActivity implements MultiItemSelectAdapter.OnAdapterClickListener, SingleItemSelectAdapter.OnAdapterClickListener {
+public class RecyclerViewItemSelectActivity extends BaseMvpActivity implements MultiItemSelectAdapter.OnAdapterClickListener,
+        SingleItemSelectAdapter.OnAdapterClickListener {
 
     private RecyclerView mMultiRecyclerView;
     private RecyclerView mSingleRecyclerView;
@@ -38,14 +38,25 @@ public class RecyclerViewItemSelectActivity extends BaseMvpActivity implements M
 
     @Override
     public void initView() {
-        ViewDataBinding viewDataBinding = getDataBinding();
-        if (viewDataBinding != null) {
-            ActivityRecyclerViewItemSelectBinding binding = (ActivityRecyclerViewItemSelectBinding) viewDataBinding;
-            mMultiRecyclerView = binding.itemHasMulSelect;
-            mSingleRecyclerView = binding.itemSingleSelect;
-            mMultiBeans = getSelectItemMultiBean();
-            mSingleBeans = getSelectItemSingleBean();
-        }
+        ActivityRecyclerViewItemSelectBinding binding = (ActivityRecyclerViewItemSelectBinding) mViewDataBinding;
+        mMultiRecyclerView = binding.itemHasMulSelect;
+        mSingleRecyclerView = binding.itemSingleSelect;
+    }
+
+    @Override
+    public void initData() {
+        mMultiBeans = getSelectItemMultiBean();
+        mSingleBeans = getSelectItemSingleBean();
+
+        mMultiAdapter = new MultiItemSelectAdapter();
+        mMultiAdapter.setAdapterData(mMultiBeans);
+        mMultiRecyclerView.setAdapter(mMultiAdapter);
+        mMultiAdapter.setOnAdapterClickListener(this);
+
+        mSingleAdapter = new SingleItemSelectAdapter();
+        mSingleAdapter.setAdapterData(mSingleBeans);
+        mSingleRecyclerView.setAdapter(mSingleAdapter);
+        mSingleAdapter.setOnAdapterClickListener(this);
     }
 
     private List<SelectItemBean.Multi> getSelectItemMultiBean() {
@@ -67,21 +78,6 @@ public class RecyclerViewItemSelectActivity extends BaseMvpActivity implements M
             }
         }
         return singles;
-    }
-
-
-    @Override
-    public void initData() {
-        mMultiAdapter = new MultiItemSelectAdapter();
-        mMultiAdapter.setAdapterData(mMultiBeans);
-        mMultiRecyclerView.setAdapter(mMultiAdapter);
-        mMultiAdapter.setOnAdapterClickListener(this);
-
-
-        mSingleAdapter = new SingleItemSelectAdapter();
-        mSingleAdapter.setAdapterData(mSingleBeans);
-        mSingleRecyclerView.setAdapter(mSingleAdapter);
-        mSingleAdapter.setOnAdapterClickListener(this);
     }
 
     @Override

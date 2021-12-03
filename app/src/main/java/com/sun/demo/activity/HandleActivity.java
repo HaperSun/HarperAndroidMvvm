@@ -7,12 +7,12 @@ import android.os.Message;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ViewDataBinding;
 
 import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.common.UiHandler;
 import com.sun.demo.R;
 import com.sun.demo.databinding.ActivityHandleBinding;
+import com.sun.demo.fragment.TestFragment;
 
 /**
  * @author: Harper
@@ -31,27 +31,27 @@ public class HandleActivity extends BaseMvpActivity {
     }
 
     @Override
+    public int layoutId() {
+        return R.layout.activity_handle;
+    }
+
+    @Override
     public void initView() {
-        ViewDataBinding viewDataBinding = getDataBinding();
-        if (viewDataBinding != null) {
-            ActivityHandleBinding binding = (ActivityHandleBinding) viewDataBinding;
-            mTextView = binding.handleText;
-        }
+        ActivityHandleBinding binding = (ActivityHandleBinding) mViewDataBinding;
+        mTextView = binding.handleText;
     }
 
     @Override
     public void initData() {
         mHandler.post(mRunnable);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, TestFragment.newInstance())
+                .commitAllowingStateLoss();
     }
 
     private final Runnable mRunnable = () -> {
         mHandler.sendEmptyMessageDelayed(0, 3000);
     };
-
-    @Override
-    public int layoutId() {
-        return R.layout.activity_handle;
-    }
 
     private static class MyHandler extends UiHandler<HandleActivity> {
 

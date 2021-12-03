@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sun.base.ui.activity.BaseMvpActivity;
@@ -35,11 +34,8 @@ public class HomepageActivity extends BaseMvpActivity {
 
     @Override
     public void initView() {
-        ViewDataBinding viewDataBinding = getDataBinding();
-        if (viewDataBinding != null){
-            ActivityHomepageBinding binding = (ActivityHomepageBinding) viewDataBinding;
-            mRecyclerView = binding.recyclerView;
-        }
+        ActivityHomepageBinding binding = (ActivityHomepageBinding) mViewDataBinding;
+        mRecyclerView = binding.recyclerView;
     }
 
     @Override

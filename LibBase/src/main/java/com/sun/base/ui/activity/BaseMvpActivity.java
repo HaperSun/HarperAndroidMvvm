@@ -1,7 +1,6 @@
 package com.sun.base.ui.activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.ColorInt;
@@ -12,7 +11,6 @@ import com.githang.statusbar.StatusBarCompat;
 import com.sun.base.R;
 import com.sun.base.presenter.BasePresenter;
 import com.sun.base.ui.IAddPresenterView;
-import com.sun.base.ui.widget.BaseHeader;
 import com.sun.base.util.CommonUtils;
 import com.sun.base.util.StatusBarUtil;
 
@@ -27,14 +25,13 @@ import java.util.Set;
 
 public abstract class BaseMvpActivity extends BaseActivity implements IAddPresenterView {
 
-    protected BaseHeader mHeader;
     protected @ColorInt
     //状态栏背景色
     int mStatusBarColor;
     private Set<BasePresenter> mPresenters;
     //默认状态栏背景色
     private int mDefaultStatusBarColor;
-    private ViewDataBinding binding;
+    public ViewDataBinding mViewDataBinding;
 
     /**
      * 子类每次new一个presenter的时候，请调用此方法
@@ -56,27 +53,26 @@ public abstract class BaseMvpActivity extends BaseActivity implements IAddPresen
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         beforeSetContentView(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, layoutId());
-        if (needSetStatusBar()) {
-            initStatusBarColor();
-            StatusBarCompat.setStatusBarColor(this, mStatusBarColor);
-        }
+        mViewDataBinding = DataBindingUtil.setContentView(this, layoutId());
+        //设置StatusBar颜色，默认白色
+        initStatusBar();
         initView();
         initData();
-        initEvent();
+        //设置不可以多点点击
+        initMultiClick();
+    }
+
+    private void initMultiClick() {
         if (!setMotionEventSplittingEnabled()) {
-            //设置不可以多点点击
             CommonUtils.setMotionEventSplittingEnabled(findViewById(android.R.id.content), false);
         }
     }
 
-    /**
-     * 获取ViewDataBinding
-     *
-     * @return null 或者binding对象
-     */
-    public ViewDataBinding getDataBinding() {
-        return binding;
+    private void initStatusBar() {
+        if (needSetStatusBar()) {
+            initStatusBarColor();
+            StatusBarCompat.setStatusBarColor(this, mStatusBarColor);
+        }
     }
 
     public void initStatusBarColor() {
@@ -86,32 +82,6 @@ public abstract class BaseMvpActivity extends BaseActivity implements IAddPresen
             mStatusBarColor = setStatusBarColorIfSupport();
         } else {
             mStatusBarColor = getResources().getColor(R.color.color_app_status_bar);
-        }
-    }
-
-    @Override
-    public void initEvent() {
-        if (mHeader != null && mHeader.getOnTitleClickListener() == null) {
-            mHeader.setOnTitleClickListener(new BaseHeader.OnTitleClickListener() {
-                @Override
-                public void onLeftClick(View view) {
-                    finish();
-                }
-
-                @Override
-                public void onRightClick(View view) {
-                    finish();
-                }
-            });
-        }
-    }
-
-    @Override
-    public void setTitle(CharSequence title) {
-        if (mHeader != null) {
-            mHeader.setTitle(title);
-        } else {
-            super.setTitle(title);
         }
     }
 

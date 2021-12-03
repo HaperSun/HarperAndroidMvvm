@@ -1,18 +1,17 @@
 package com.sun.demo.activity;
 
-import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.demo.R;
 import com.sun.demo.databinding.ActivityMultiTypeRecyclerViewBinding;
 import com.sun.demo.model.ImgBean;
-import com.sun.demo.model.response.MultiResponse;
 import com.sun.demo.model.TextBean;
+import com.sun.demo.model.response.MultiResponse;
 import com.sun.demo.widget.ImgViewBinder;
 import com.sun.demo.widget.TextViewBinder;
 
@@ -50,12 +49,8 @@ public class MultiTypeRecyclerViewActivity extends BaseMvpActivity {
 
     @Override
     public void initView() {
-        ViewDataBinding viewDataBinding = getDataBinding();
-        if (viewDataBinding != null) {
-            ActivityMultiTypeRecyclerViewBinding binding = (ActivityMultiTypeRecyclerViewBinding) viewDataBinding;
-            mRecyclerView = binding.multiTypeRecyclerView;
-        }
-
+        ActivityMultiTypeRecyclerViewBinding binding = (ActivityMultiTypeRecyclerViewBinding) mViewDataBinding;
+        mRecyclerView = binding.multiTypeRecyclerView;
     }
 
     @Override

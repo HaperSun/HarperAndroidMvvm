@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 import com.sun.base.presenter.BasePresenter;
 import com.sun.base.ui.IAddPresenterView;
@@ -24,46 +26,34 @@ import java.util.Set;
 public abstract class BaseMvpFragment extends BaseFragment implements IAddPresenterView {
 
     private Set<BasePresenter> mPresenters;
-
-    /**
-     * 子类每次new一个presenter的时候，请调用此方法
-     *
-     * @param presenter
-     */
-    @Override
-    public void addPresenter(BasePresenter presenter) {
-        if (mPresenters == null) {
-            mPresenters = new HashSet<>();
-        }
-        if (!mPresenters.contains(presenter)) {
-            mPresenters.add(presenter);
-        }
-    }
-
     protected View mRootView;
+    public ViewDataBinding mViewDataBinding;
 
-    public BaseMvpFragment() {
-        // Required empty public constructor
-    }
+    public BaseMvpFragment() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = getBaseActivity();
-        initData();
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = LayoutInflater.from(mActivity).inflate(layoutId(), container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mViewDataBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false);
+        mRootView = mViewDataBinding.getRoot();
         initView();
-        initEvent();
+        initData();
+        //设置不可以多点点击
+        initMultiClick();
+        return mRootView;
+    }
+
+    protected void initMultiClick(){
         if (!setMotionEventSplittingEnabled() && mRootView instanceof ViewGroup) {
             //设置不可以多点点击
             CommonUtils.setMotionEventSplittingEnabled((ViewGroup) mRootView, false);
         }
-        return mRootView;
     }
 
     @Override
@@ -79,6 +69,21 @@ public abstract class BaseMvpFragment extends BaseFragment implements IAddPresen
 
     public <T extends View> T $(@IdRes int id) {
         return mRootView.findViewById(id);
+    }
+
+    /**
+     * 子类每次new一个presenter的时候，请调用此方法
+     *
+     * @param presenter
+     */
+    @Override
+    public void addPresenter(BasePresenter presenter) {
+        if (mPresenters == null) {
+            mPresenters = new HashSet<>();
+        }
+        if (!mPresenters.contains(presenter)) {
+            mPresenters.add(presenter);
+        }
     }
 
     /**

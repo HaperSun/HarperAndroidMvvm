@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".activity.HandleActivity">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/handle_text"
@@ -16,11 +15,6 @@
             android:padding="@dimen/dimen_10"
             android:textColor="@color/black"
             android:textSize="@dimen/font_32" />
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/dimen_20" />
     </LinearLayout>
+
 </layout>

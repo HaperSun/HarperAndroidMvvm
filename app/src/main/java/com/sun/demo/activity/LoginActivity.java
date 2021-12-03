@@ -1,14 +1,12 @@
 package com.sun.demo.activity;
 
-import androidx.databinding.ViewDataBinding;
-
 import android.content.Context;
 import android.content.Intent;
 
-import com.sun.common.toast.ToastHelper;
 import com.sun.base.net.exception.ApiException;
 import com.sun.base.ui.activity.BaseMvpActivity;
 import com.sun.common.toast.CustomToast;
+import com.sun.common.toast.ToastHelper;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
 import com.sun.demo.R;
@@ -38,13 +36,10 @@ public class LoginActivity extends BaseMvpActivity implements LoginView {
 
     @Override
     public void initView() {
-        ViewDataBinding viewDataBinding = getDataBinding();
-        if (viewDataBinding != null) {
-            ActivityLoginBinding binding = (ActivityLoginBinding) viewDataBinding;
-            binding.login.setOnClickListener(v -> doLogin());
-            binding.commonToast.setOnClickListener(v -> ToastHelper.showCommonToast(this, R.string.copy_success));
-            binding.customToast.setOnClickListener(v -> ToastHelper.showCustomToast(this, R.string.copy_success));
-        }
+        ActivityLoginBinding binding = (ActivityLoginBinding) mViewDataBinding;
+        binding.login.setOnClickListener(v -> doLogin());
+        binding.commonToast.setOnClickListener(v -> ToastHelper.showCommonToast(this, R.string.copy_success));
+        binding.customToast.setOnClickListener(v -> ToastHelper.showCustomToast(this, R.string.copy_success));
     }
 
     @Override
