@@ -1,7 +1,5 @@
 package com.sun.base.ui.activity;
 
-import androidx.fragment.app.FragmentManager;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,10 +10,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.sun.base.ui.IBaseActivity;
 import com.sun.base.ui.IBaseView;
@@ -68,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
                 }
                 View view = getCurrentFocus();
                 if (isHideInput(view, ev)) {
-                    HideSoftInput(view.getWindowToken());
+                    hideSoftInput(view.getWindowToken());
                 }
             }
             return super.dispatchTouchEvent(ev);
@@ -97,7 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     // 隐藏软键盘
-    private void HideSoftInput(IBinder token) {
+    private void hideSoftInput(IBinder token) {
         if (token != null) {
             InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             manager.hideSoftInputFromWindow(token,
@@ -235,31 +233,27 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         return true;
     }
 
-    protected LoadingDialog mDefaultLoadingDialog;
+    protected LoadingDialog mShowLoading;
 
-    protected void dismissDefaultLoadingDialog() {
-        if (mDefaultLoadingDialog != null && mDefaultLoadingDialog.isShowing()) {
-            mDefaultLoadingDialog.dismiss();
+    protected void dismissLoading() {
+        if (mShowLoading != null && mShowLoading.isShowing()) {
+            mShowLoading.dismiss();
         }
     }
 
-    protected void showDefaultLoadingDialog(CharSequence title) {
-        if (mDefaultLoadingDialog == null) {
-            mDefaultLoadingDialog = new LoadingDialog.Builder(this)
+    protected void showLoading(@StringRes int titleResId) {
+        showLoading(getString(titleResId));
+    }
+
+    protected void showLoading(CharSequence title) {
+        if (mShowLoading == null) {
+            mShowLoading = new LoadingDialog.Builder(this)
                     .setCanceledOnTouchOutside(false)
                     .setCancelable(false)
                     .build();
         }
-        mDefaultLoadingDialog.setTitle(title);
-        mDefaultLoadingDialog.show();
-    }
-
-    protected void showDefaultLoadingDialog(@StringRes int titleResId) {
-        showDefaultLoadingDialog(getString(titleResId));
-    }
-
-    protected BaseActivity mThis() {
-        return BaseActivity.this;
+        mShowLoading.setTitle(title);
+        mShowLoading.show();
     }
 
     @Override

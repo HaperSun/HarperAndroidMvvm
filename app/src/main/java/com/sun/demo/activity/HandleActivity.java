@@ -35,10 +35,12 @@ public class HandleActivity extends BaseMvpActivity {
         return R.layout.activity_handle;
     }
 
+
     @Override
     public void initView() {
         ActivityHandleBinding binding = (ActivityHandleBinding) mViewDataBinding;
         mTextView = binding.handleText;
+
     }
 
     @Override

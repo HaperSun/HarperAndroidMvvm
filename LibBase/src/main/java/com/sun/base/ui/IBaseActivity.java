@@ -23,6 +23,7 @@ public interface IBaseActivity {
      */
     int layoutId();
 
+
     /**
      * 初始化view
      */
