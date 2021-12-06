@@ -3,5 +3,5 @@
     android:orientation="vertical"
     android:id="@+id/item_img"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_80"
+    android:layout_height="@dimen/dp40"
     android:src="@mipmap/app_logo" />

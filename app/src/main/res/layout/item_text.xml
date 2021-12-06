@@ -3,8 +3,8 @@
     android:orientation="vertical"
     android:id="@+id/item_text"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_80"
-    android:textSize="@dimen/font_32"
+    android:layout_height="@dimen/dp40"
+    android:textSize="@dimen/sp16"
     android:textColor="@color/black"
-    android:padding="@dimen/dimen_10"
+    android:padding="@dimen/dp5"
     android:gravity="center"/>

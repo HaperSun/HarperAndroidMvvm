@@ -8,17 +8,17 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_10"
+        android:layout_margin="@dimen/dp5"
         app:cardBackgroundColor="@color/color_C0E8FD"
-        app:cardCornerRadius="@dimen/dimen_12"
-        app:cardElevation="@dimen/dimen_4">
+        app:cardCornerRadius="@dimen/dp6"
+        app:cardElevation="@dimen/dp2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="@dimen/dimen_10">
+            android:padding="@dimen/dp5">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     android:includeFontPadding="false"
                     android:text="签名"
                     android:textColor="@color/color_101010"
-                    android:textSize="@dimen/font_32" />
+                    android:textSize="@dimen/sp12" />
 
                 <TextView
                     android:id="@+id/tv_clear"
@@ -44,13 +44,13 @@
                     android:padding="5dp"
                     android:text="清除"
                     android:textColor="@color/board_clear_tv_col"
-                    android:textSize="@dimen/font_32" />
+                    android:textSize="@dimen/sp12" />
             </FrameLayout>
 
             <com.sun.sign.widget.SignatureInputView
                 android:id="@+id/signature_pad"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_460"
+                android:layout_height="@dimen/dp230"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
@@ -60,15 +60,15 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimen_100">
+                android:layout_height="@dimen/dp50">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/dimen_210"
-                    android:layout_height="@dimen/dimen_70"
-                    android:layout_marginTop="@dimen/dimen_15"
-                    android:layout_marginBottom="@dimen/dimen_15"
+                    android:layout_width="@dimen/dp105"
+                    android:layout_height="@dimen/dp35"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginBottom="@dimen/dp8"
                     app:cardCornerRadius="4dp"
-                    app:cardElevation="@dimen/dimen_4">
+                    app:cardElevation="@dimen/dp2">
 
                     <TextView
                         android:id="@+id/tv_refuse"
@@ -78,17 +78,17 @@
                         android:gravity="center"
                         android:text="返回看看"
                         android:textColor="@color/color_101010"
-                        android:textSize="@dimen/font_32" />
+                        android:textSize="@dimen/sp16" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/dimen_210"
-                    android:layout_height="@dimen/dimen_70"
+                    android:layout_width="@dimen/dp105"
+                    android:layout_height="@dimen/dp35"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="7.5dp"
                     android:layout_marginBottom="7.5dp"
                     app:cardCornerRadius="4dp"
-                    app:cardElevation="@dimen/dimen_4">
+                    app:cardElevation="@dimen/dp2">
 
                     <TextView
                         android:id="@+id/tv_ok"
@@ -98,7 +98,7 @@
                         android:gravity="center"
                         android:text="验收合格"
                         android:textColor="@color/color_101010"
-                        android:textSize="@dimen/font_32" />
+                        android:textSize="@dimen/sp16" />
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
