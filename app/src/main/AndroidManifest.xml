@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sun.demo">
+    package="com.sun.demo1">
 
     <queries>
         <package android:name="com.tencent.mm" />
@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name=".MainApplication"
+        android:name="com.sun.demo1.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
@@ -28,7 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.HomepageActivity"
+            android:name="com.sun.demo1.activity.HomepageActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -38,38 +38,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.sun.demo1.activity.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activity.SignActivity"
+            android:name="com.sun.demo1.activity.SignActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activity.MultiTypeRecyclerViewActivity"
+            android:name="com.sun.demo1.activity.MultiTypeRecyclerViewActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activity.HandleActivity"
+            android:name="com.sun.demo1.activity.HandleActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activity.RecyclerViewItemSelectActivity"
+            android:name="com.sun.demo1.activity.RecyclerViewItemSelectActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
 
         <!-- 微信 -->
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.sun.demo1.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.sun.demo.fileprovider"
+            android:authorities="com.sun.demo1.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

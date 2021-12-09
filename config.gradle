@@ -16,6 +16,7 @@ Environment environment = ENVIRONMENT
 def isTestApi = environment != Environment.RELEASE
 
 def app = [:]
+app.package = PACKAGE_NAME
 app.versionCode = isTestApi ? Integer.parseInt(VERSION_CODE + DALIY_VERSION) : Integer.parseInt(VERSION_CODE)
 app.versionName = VERSION_NAME
 //友盟的 app_key
