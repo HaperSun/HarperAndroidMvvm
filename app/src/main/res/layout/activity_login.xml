@@ -40,5 +40,15 @@
             android:text="普通的Toast"
             android:textColor="@color/black"
             android:textSize="@dimen/sp16" />
+
+        <com.sun.demo1.tab.style.SectorMenuButton
+            android:id="@+id/sector_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:background="@color/purple_200"
+            android:padding="@dimen/dp10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp16"/>
     </LinearLayout>
 </layout>

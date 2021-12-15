@@ -10,8 +10,9 @@ import com.sun.base.util.LogUtil;
 import com.sun.base.util.RetrofitUtils;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
-import com.tencent.smtt.sdk.QbSdk;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
 
 /**
  * @author Harper
@@ -21,36 +22,28 @@ import com.umeng.commonsdk.UMConfigure;
 public class MainApplication extends Application implements UserInfoManager.OnUpdateUserInfoListener,
         UserInfoManager.OnGetCurrentUserInfoListener {
 
+    private static MainApplication ctx;
     private UserInfo mUserInfo;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Context context = MainApplication.this;
-        TDevice.initTDevice(context);
-        NetWorks.init(context);
-        NetWork.init(context);
-        RetrofitUtils.initRetrofit(context);
+        ctx = MainApplication.this;
+        TDevice.initTDevice(ctx);
+        NetWorks.init(ctx);
+        NetWork.init(ctx);
+        RetrofitUtils.initRetrofit(ctx);
         //初始化LogUtil
-        LogUtil.init(context, LogUtil.ALL);
+        LogUtil.init(ctx, LogUtil.ALL);
         //初始化友盟SDK
-        String umAppKey = context.getResources().getString(R.string.um_app_key);
-        UMConfigure.init(this, umAppKey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
-        initX5();
+        initUmSdk();
     }
 
-    private void initX5() {
-        QbSdk.initX5Environment(MainApplication.this, new QbSdk.PreInitCallback() {
-            @Override
-            public void onCoreInitFinished() {
-
-            }
-
-            @Override
-            public void onViewInitFinished(boolean b) {
-
-            }
-        });
+    private void initUmSdk() {
+        UMConfigure.init(ctx, "5cbad65a570df39ea70012b8", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+        PlatformConfig.setWeixin("wx18719ce4d83c714a", "c766c2b5d6151ccf926dd03cbc8e56a5");
+        PlatformConfig.setWXFileProvider("com.sun.demo1.fileprovider");
     }
 
     @Override
@@ -64,5 +57,13 @@ public class MainApplication extends Application implements UserInfoManager.OnUp
             mUserInfo = UserInfoManager.getInstance(this).getCurrentLoginUser();
         }
         return mUserInfo;
+    }
+
+    public static MainApplication getInstance() {
+        return ctx;
+    }
+
+    public static Context getContext() {
+        return ctx;
     }
 }

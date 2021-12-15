@@ -6,6 +6,8 @@ buildscript {
         google()
         mavenCentral()
         maven { url  'https://repo1.maven.org/maven2/'}
+        //分享
+        maven { url  'https://repo1.maven.org/maven2/'}
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.0"
@@ -21,6 +23,8 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven { url  'https://repo1.maven.org/maven2/'}
+        //分享
         maven { url  'https://repo1.maven.org/maven2/'}
     }
 }

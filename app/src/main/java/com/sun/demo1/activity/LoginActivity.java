@@ -14,6 +14,12 @@ import com.sun.demo1.databinding.ActivityLoginBinding;
 import com.sun.demo1.iview.LoginView;
 import com.sun.demo1.model.response.LoginResponse;
 import com.sun.demo1.present.LoginPresenter;
+import com.sun.demo1.tab.style.ButtonData;
+import com.sun.demo1.tab.style.ButtonEventListener;
+import com.sun.demo1.tab.style.SectorMenuButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: Harper
@@ -23,6 +29,7 @@ import com.sun.demo1.present.LoginPresenter;
 public class LoginActivity extends BaseMvpActivity implements LoginView {
 
     private LoginPresenter mLoginPresenter;
+    private SectorMenuButton mSectorMenuButton;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -40,6 +47,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginView {
         binding.login.setOnClickListener(v -> doLogin());
         binding.commonToast.setOnClickListener(v -> ToastHelper.showCommonToast(this, R.string.copy_success));
         binding.customToast.setOnClickListener(v -> ToastHelper.showCustomToast(this, R.string.copy_success));
+        mSectorMenuButton = binding.sectorMenuButton;
     }
 
     @Override
@@ -47,6 +55,40 @@ public class LoginActivity extends BaseMvpActivity implements LoginView {
         if (mLoginPresenter == null) {
             mLoginPresenter = new LoginPresenter(this);
         }
+        initSectorMenuButton();
+    }
+
+    private void initSectorMenuButton() {
+        final List<ButtonData> buttonDatas = new ArrayList<>();
+        int[] drawable = {R.mipmap.touming, R.mipmap.danger_upload_ionc, R.mipmap.accident_upload_icon};
+        for (int i = 0; i < 3; i++) {
+            ButtonData buttonData = ButtonData.buildIconButton(this, drawable[i], 0);
+            buttonDatas.add(buttonData);
+        }
+        mSectorMenuButton.setButtonDatas(buttonDatas);
+        setListener(mSectorMenuButton);
+    }
+
+    private void setListener(final SectorMenuButton button) {
+        button.setButtonEventListener(new ButtonEventListener() {
+            @Override
+            public void onButtonClicked(int index) {
+                if (index == 1) {
+                    ToastHelper.showCommonToast(LoginActivity.this, R.string.copy_success);
+                } else {
+                    ToastHelper.showCommonToast(LoginActivity.this, R.string.copy_success);
+                }
+            }
+
+            @Override
+            public void onExpand() {
+
+            }
+
+            @Override
+            public void onCollapse() {
+            }
+        });
     }
 
     private void doLogin() {

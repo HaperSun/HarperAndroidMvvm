@@ -1,12 +1,11 @@
-plugins {
-    id 'com.android.application'
-}
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion build_version.compile_sdk
     buildToolsVersion build_version.build_tools
 
     defaultConfig {
+        multiDexEnabled true
         applicationId config.app.package
         minSdkVersion build_version.min_sdk
         targetSdkVersion build_version.target_sdk
@@ -20,11 +19,47 @@ android {
         ndk{abiFilters "armeabi"}
     }
 
+    signingConfigs {
+        debug {
+            storeFile file('../key/demo1.jks')
+            storePassword '654321'
+            keyAlias 'demo1'
+            keyPassword '654321'
+        }
+        release {
+            storeFile file('../key/demo1.jks')
+            storePassword '654321'
+            keyAlias 'demo1'
+            keyPassword '654321'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
             signingConfig signingConfigs.debug
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    //生成apk名字的格式：
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def date = new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+08"));
+            if (variant.buildType.name.equals('debug')) {
+                //可自定义自己想要生成的格式
+                outputFileName = "harper_${date}.apk"
+            }
+            if (variant.buildType.name.equals('release')) {
+                outputFileName = "harper_${versionName}.apk"
+            }
         }
     }
 
@@ -39,22 +74,31 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation target.appcompat
     implementation target.material
     implementation target.constraintlayout
     implementation target.recyclerview
     api (target.multitype, { exclude group: 'com.android.support' })
+    implementation target.multidex
+
+    //友盟分享
+    implementation target.umsdk_common
+    implementation target.umsdk_asms
+    implementation target.umsdk_link
+    implementation target.umsdk_share_core
+    implementation target.umsdk_share_board
+    implementation target.umsdk_share_wx
+    implementation target.wechat_opensdk
+
     api project(':LibBase')
     api project(':LibDb')
     api project(':LibSign')
     api project(':LibCommon')
-
-    //友盟
-    implementation 'com.umeng.umsdk:common:9.4.4' // (必选)版本号
-    implementation 'com.umeng.umsdk:asms:1.4.1' // asms包依赖(必选)
-    implementation 'com.umeng.umsdk:share-wx:7.1.6' //微信完整版
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
-    implementation files('libs\\tbs_sdk_thirdapp_v4.3.0.215_44115_sharewithdownloadwithfile_withoutGame_obfs_20211019_111112.jar')
-//微信官方依赖库，必选
 }
