@@ -101,4 +101,5 @@ dependencies {
     api project(':LibDb')
     api project(':LibSign')
     api project(':LibCommon')
+    api project(':LibImg')
 }

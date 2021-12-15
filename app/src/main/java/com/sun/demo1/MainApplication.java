@@ -10,6 +10,7 @@ import com.sun.base.util.LogUtil;
 import com.sun.base.util.RetrofitUtils;
 import com.sun.db.entity.UserInfo;
 import com.sun.db.table.manager.UserInfoManager;
+import com.sun.img.load.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
@@ -35,6 +36,8 @@ public class MainApplication extends Application implements UserInfoManager.OnUp
         RetrofitUtils.initRetrofit(ctx);
         //初始化LogUtil
         LogUtil.init(ctx, LogUtil.ALL);
+        //初始化图片加载组件
+        ImageLoader.getInstance().setStrategy();
         //初始化友盟SDK
         initUmSdk();
     }

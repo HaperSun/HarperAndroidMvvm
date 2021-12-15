@@ -16,6 +16,9 @@ version.logger = "2.2.0"
 version.adapter_rxjava2 = "2.9.0"
 version.status_bar_compat = "0.7"
 version.multidex = "2.0.1"
+version.glide = "4.9.0"
+version.photoView = "2.1.4" //com.github.chrisbanes:PhotoView   支持缩放的ImageView库
+version.andpermission = "2.0.1" //com.yanzhenjie.permission:support AndPermission运行时权限处理库
 
 //友盟
 version.umsdk_common = "9.4.4"  //必选
@@ -36,7 +39,10 @@ target.recyclerview = "androidx.recyclerview:recyclerview:$version.recyclerview"
 target.annotation = "androidx.annotation:annotation:$version.annotation"
 target.multitype = "me.drakeet.multitype:multitype:$version.multitype"
 target.status_bar_compat = "com.githang:status-bar-compat:$version.status_bar_compat"
+target.glide = "com.github.bumptech.glide:glide:$version.glide"
 target.multidex = "androidx.multidex:multidex:$version.multidex"
+target.photoView = "com.github.chrisbanes:PhotoView:$version.photoView"
+target.andpermission = "com.yanzhenjie.permission:support:$version.andpermission"
 
 //友盟
 target.umsdk_common = "com.umeng.umsdk:common:$version.umsdk_common"

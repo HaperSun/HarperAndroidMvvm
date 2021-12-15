@@ -42,11 +42,15 @@ public abstract class BaseMvpFragment extends BaseFragment implements IAddPresen
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mViewDataBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false);
         mRootView = mViewDataBinding.getRoot();
+        initBundle();
         initView();
         initData();
         //设置不可以多点点击
         initMultiClick();
         return mRootView;
+    }
+
+    public void initBundle() {
     }
 
     protected void initMultiClick(){

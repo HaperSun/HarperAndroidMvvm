@@ -40,3 +40,6 @@ Donut	                1.6	            4	            2009-09-01	        BuildVers
 Cupcake	                1.5	            3	            2009-05-01	        BuildVersionCodes.Cupcake
 Base	                1.1	            2	            2009-02-01	        BuildVersionCodes.Base11
 Base	                1.0	            1	            2008-10-01	        BuildVersionCodes.Base
+
+github地址：
+https://github.com/chrisbanes/PhotoView

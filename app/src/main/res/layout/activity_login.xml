@@ -41,6 +41,12 @@
             android:textColor="@color/black"
             android:textSize="@dimen/sp16" />
 
+        <ImageView
+            android:id="@+id/img_view"
+            android:layout_width="@dimen/dp300"
+            android:layout_height="@dimen/dp200"
+            android:layout_marginTop="@dimen/dp10"/>
+
         <com.sun.demo1.tab.style.SectorMenuButton
             android:id="@+id/sector_menu_button"
             android:layout_width="wrap_content"

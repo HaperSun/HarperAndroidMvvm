@@ -17,6 +17,8 @@ import com.sun.demo1.present.LoginPresenter;
 import com.sun.demo1.tab.style.ButtonData;
 import com.sun.demo1.tab.style.ButtonEventListener;
 import com.sun.demo1.tab.style.SectorMenuButton;
+import com.sun.img.load.ImageLoader;
+import com.sun.img.preview.ImagePreviewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,10 @@ public class LoginActivity extends BaseMvpActivity implements LoginView {
         binding.commonToast.setOnClickListener(v -> ToastHelper.showCommonToast(this, R.string.copy_success));
         binding.customToast.setOnClickListener(v -> ToastHelper.showCustomToast(this, R.string.copy_success));
         mSectorMenuButton = binding.sectorMenuButton;
+        String img1 = "https://qiniu.fxgkpt.com/hycg/1639356784663.jpg";
+        String img2 = "http://pic.ntimg.cn/file/20180211/7259105_125622777789_2.jpg";
+        ImageLoader.getInstance().loadImage(img2, binding.imgView);
+        binding.imgView.setOnClickListener(v -> ImagePreviewActivity.actionStart(this, img2));
     }
 
     @Override
