@@ -1,15 +1,16 @@
 ext.target = [:]
 
 def version = [:]
-version.appcompat = "1.2.0"
+version.appcompat = "1.3.0"
 version.material = "1.2.1"
 version.constraintlayout = "2.0.1"
 version.greendao = "3.3.0"
 version.generator = "3.3.0"
 version.recyclerview = "1.2.0-alpha05"
+version.smart_refresh = "1.1.0-alpha-31" //smartRefresh
 version.annotation = "1.1.0"
 version.multitype = "3.4.4"
-version.rxjava = "2.1.7"
+version.rxjava = "2.2.3"
 version.rxandroid = "2.0.2"
 version.converter_gson = "2.9.0"
 version.logger = "2.2.0"
@@ -29,6 +30,23 @@ version.umsdk_share_board = "7.1.6" //分享面板功能，可选
 version.umsdk_share_wx = "7.1.6"    //微信完整版
 version.wechat_opensdk = "6.8.0"    //微信官方依赖库，必选
 
+//MVVM
+version.rxlifecycle = "2.2.2"
+version.rxlifecycle_components = "2.2.2"
+version.dialogs_core = "0.9.6.0"
+version.dialogs_commons = "0.9.6.0"
+version.lifecycle_extensions = "2.2.0"
+version.lifecycle_compiler = "2.0.0"
+version.rxbinding = "2.1.1"
+version.bindingcollectionadapter = "4.0.0"
+version.bindingcollectionadapter_recyclerview = "4.0.0"
+version.bindingcollectionadapter_viewpager2 = "4.0.0"
+version.okhttp3 = "3.14.9"
+version.retrofit2 = "2.9.0"
+version.tkrefreshlayout = "1.0.7"
+version.gson = "2.8.6"
+version.rxpermissions = "0.10.2"
+
 def target =[:]
 target.appcompat = "androidx.appcompat:appcompat:$version.appcompat"
 target.material = "com.google.android.material:material:$version.material"
@@ -36,6 +54,7 @@ target.constraintlayout = "androidx.constraintlayout:constraintlayout:$version.c
 target.greendao = "org.greenrobot:greendao:$version.greendao"
 target.generator = "org.greenrobot:greendao-generator:$version.generator"
 target.recyclerview = "androidx.recyclerview:recyclerview:$version.recyclerview"
+target.smart_refresh = "com.scwang.smartrefresh:SmartRefreshLayout:$version.smart_refresh"
 target.annotation = "androidx.annotation:annotation:$version.annotation"
 target.multitype = "me.drakeet.multitype:multitype:$version.multitype"
 target.status_bar_compat = "com.githang:status-bar-compat:$version.status_bar_compat"
@@ -58,6 +77,24 @@ target.rxandroid = "io.reactivex.rxjava2:rxandroid:$version.rxandroid"
 target.converter_gson = "com.squareup.retrofit2:converter-gson:$version.converter_gson"
 target.logger = "com.orhanobut:logger:$version.logger"
 target.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$version.adapter_rxjava2"
+
+//MVVM
+target.rxlifecycle = "com.trello.rxlifecycle2:rxlifecycle:$version.rxlifecycle"
+target.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:$version.rxlifecycle_components"
+target.dialogs_core = "com.afollestad.material-dialogs:core:$version.dialogs_core"
+target.dialogs_commons = "com.afollestad.material-dialogs:commons:$version.dialogs_commons"
+target.lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:$version.lifecycle_extensions"
+target.lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:$version.lifecycle_compiler"
+target.rxbinding = "com.jakewharton.rxbinding2:rxbinding:$version.rxbinding"
+target.bindingcollectionadapter = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$version.bindingcollectionadapter"
+target.bindingcollectionadapter_recyclerview = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$version.bindingcollectionadapter_recyclerview"
+target.bindingcollectionadapter_viewpager2 = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-viewpager2:$version.bindingcollectionadapter_viewpager2"
+target.okhttp3 = "com.squareup.okhttp3:okhttp:$version.okhttp3"
+target.retrofit2 = "com.squareup.retrofit2:retrofit:$version.retrofit2"
+target.tkrefreshlayout = "com.lcodecorex:tkrefreshlayout:$version.tkrefreshlayout"
+target.gson = "com.google.code.gson:gson:$version.gson"
+target.rxpermissions = "com.github.tbruyelle:rxpermissions:$version.rxpermissions"
+
 
 ext.target = target
 

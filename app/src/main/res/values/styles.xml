@@ -1,0 +1,7 @@
+<resources>
+    <style name="ViewLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/cl_F0F0F0F</item>
+    </style>
+</resources>

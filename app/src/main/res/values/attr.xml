@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SectorMenuButton">
-        <attr name="aebMainButtonSizeDp" format="dimension|reference" />
-        <attr name="aebSubButtonSizeDp" format="dimension|reference" />
-        <attr name="aebButtonGapDp" format="dimension|reference" />
-        <attr name="aebStartAngleDegree" format="integer|reference" />
-        <attr name="aebEndAngleDegree" format="integer|reference" />
-        <attr name="aebAnimDurationMillis" format="integer|reference" />
-        <attr name="aebButtonElevation" format="dimension|reference" />
-        <attr name="aebMaskBackgroundColor" format="color|reference" />
-        <attr name="aebIsSelectionMode" format="boolean" />
-        <attr name="aebMainButtonTextColor" format="color|reference" />
-        <attr name="aebSubButtonTextColor" format="color|reference" />
-        <attr name="aebMainButtonTextSizeSp" format="dimension|reference" />
-        <attr name="aebSubButtonTextSizeSp" format="dimension|reference" />
-        <attr name="aebRippleEffect" format="boolean" />
-        <attr name="aebRippleColor" format="color|reference"/>
-        <attr name="aebMainButtonRotateDegree" format="integer|reference"/>
-        <attr name="aebMainButtonRotateAnimDurationMillis" format="integer|reference"/>
-        <attr name="aebBlurBackground" format="boolean" />
-        <attr name="aebBlurRadius" format="float|reference"/>
+    <declare-styleable name="TwinklingRefreshLayout">
+        <attr name="tr_wave_height" format="dimension" />
+        <attr name="tr_head_height" format="dimension" />
+        <attr name="tr_bottom_height" format="dimension" />
+        <attr name="tr_overscroll_height" format="dimension" />
+        <attr name="tr_enable_loadmore" format="boolean" />
+        <attr name="tr_pureScrollMode_on" format="boolean" />
+        <attr name="tr_show_overlay_refreshview" format="boolean" />
+        <attr name="tr_headerView" format="dimension" />
+        <attr name="tr_bottomView" format="dimension" />
+        <attr name="onRefreshCommand" format="reference" />
+        <attr name="onLoadMoreCommand" format="reference" />
     </declare-styleable>
 </resources>

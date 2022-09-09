@@ -2,64 +2,49 @@ ext.config = [:]
 
 def config = [:]
 
-//定义当前环境类型
-enum Environment {
-    TEST, //测试环境
-    DEVELOPMENT, //模拟现网环境
-    RELEASE //现网环境
-}
-//通过在gradle.properties文件中配置的ENVIRONMENT来实现网络环境的切换!!!
-// 也可以在此处直接切换，如：将 ENVIRONMENT 改成 Environment.RELEASE 就变成现网环境了!!!
-Environment environment = ENVIRONMENT
-
-//是否是测试环境，只要不是正式环境就认为是测试环境 (请注意这个测试环境和上面定义的开发环境类型中的测试环境是两个概念)
-def isTestApi = environment != Environment.RELEASE
-
 def app = [:]
-app.package = PACKAGE_NAME
-app.versionCode = isTestApi ? Integer.parseInt(VERSION_CODE + DALIY_VERSION) : Integer.parseInt(VERSION_CODE)
-app.versionName = VERSION_NAME
+app.package = "com.sun.demo1"
+app.versionCode = 1
+app.versionName = "v0.0.1"
+
 //友盟的 app_key
 app.umeng_app_key = "6193821ce014255fcb7d1395"
+//百度人脸识别
+/*
+* <p>
+* 每个开发者账号只能创建一个人脸库；groupID用于标识人脸库
+* 为了apiKey,secretKey为您调用百度人脸在线接口的，如注册，比对等。
+* 为了的安全，建议放在您的服务端，端把人脸传给服务器，在服务端端
+* license为调用sdk的人脸检测功能使用，人脸识别 = 人脸检测（sdk功能）  + 人脸比对（服务端api）
+* <p>
+* 人脸识别 接口 https://aip.baidubce.com/rest/2.0/face/v3/search
+* 人脸注册 接口 https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/add
+*/
+app.bd_license_id = "android-harper-cj-face-android"
+app.bd_license_file_name = "idl-license.face-android"
+//腾讯云
+app.qClound_secret_id = "AKIDf6GAlwopWv4KKoRQXOzJM8h7F5hzDjRr"//永久密钥 secretId
+app.qClound_secret_key = "H1UfhTzEDvLTKwHKfnhKgmb9PN32knal"//永久密钥 secretKey
+app.qClound_region = "ap-nanjing"// 存储桶所在地域简称，例如广州地区是 ap-guangzhou
+app.qClound_bucket = "xsx-1252375120"//存储桶，格式：BucketName-APPID
+
+
 config.app = app
-
-//关于H5页面的url前缀的一些配置
-def h5 = [:]
-//H5的域名1
-h5.domain = isTestApi ? "h5测试地址" : "h5现网地址"
-config.h5 = h5
-
-//是否是测试环境
-config.isTestApi = isTestApi
-// 是否开启埋点   为了测试时产生的数据不影响埋点统计,所有测试环境埋点全部为 debug
-config.data_embed_point = isTestApi
 
 //关于服务端的地址配置
 def server = [:]
 //测试环境
-server.testUrl = "https://地址前缀"
-//准现网环境
-server.devUrl = "https://地址前缀"
+server.urlTest = "\"https://测试环境地址前缀\""
 //现网环境
-server.formalUrl = "https://地址前缀"
-switch (environment) {
-    case Environment.TEST:
-        server.finalUrl = server.testUrl
-        break
-    case Environment.DEVELOPMENT:
-        server.finalUrl = server.devUrl
-        break
-    case Environment.RELEASE:
-        server.finalUrl = server.formalUrl
-        break
-}
+server.urlRelease = "\"https://现网环境地址前缀\""
+//测试环境_H5
+server.urlH5Test = "\"https://H5测试环境地址前缀\""
+//现网环境_H5
+server.urlH5Release = "\"https://H5现网环境地址前缀\""
+
 config.server = server
 
 //GreenDao版本
-config.dao_version = Integer.parseInt(DAO_VERSION)
-
-def releaseTime() {
-    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC")).toString() + DALIY_VERSION
-}
+config.dao_version = 1
 
 ext.config = config

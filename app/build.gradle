@@ -17,6 +17,10 @@ android {
         ]
 
         ndk{abiFilters "armeabi"}
+
+        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        //用来解决All flavors must now belong to a named flavor dimension问题
+        flavorDimensions "versionCode"
     }
 
     signingConfigs {
@@ -47,6 +51,32 @@ android {
 
     lintOptions {
         abortOnError false
+    }
+
+    productFlavors {
+        //多渠道打包
+        dev {
+            applicationId "com.sun.demo1"
+            manifestPlaceholders = [
+                    APP_NAME : "Harper测试",
+                    UMENG_APP_KEY: config.app.umeng_app_key //友盟
+            ]
+            buildConfigField "String", "Base_URL", config.server.urlTest
+            buildConfigField "String", "Base_URL_H5", config.server.urlH5Test
+            buildConfigField "boolean", "VAR_BOOLEAN", 'false'
+            buildConfigField "String", "VAR_STRING", '"我是String"'
+        }
+        pro {
+            applicationId "com.sun.demo1"
+            manifestPlaceholders = [
+                    APP_NAME : "Harper",
+                    UMENG_APP_KEY: config.app.umeng_app_key //友盟
+            ]
+            buildConfigField "String", "Base_URL", config.server.urlRelease
+            buildConfigField "String", "Base_URL_H5", config.server.urlH5Release
+            buildConfigField "boolean", "VAR_BOOLEAN", 'false'
+            buildConfigField "String", "VAR_STRING", '"我是String"'
+        }
     }
 
     //生成apk名字的格式：
@@ -81,11 +111,7 @@ repositories {
 }
 
 dependencies {
-    implementation target.appcompat
-    implementation target.material
-    implementation target.constraintlayout
-    implementation target.recyclerview
-    api (target.multitype, { exclude group: 'com.android.support' })
+    implementation (target.multitype, { exclude group: 'com.android.support' })
     implementation target.multidex
 
     //友盟分享
@@ -97,9 +123,11 @@ dependencies {
     implementation target.umsdk_share_wx
     implementation target.wechat_opensdk
 
-    api project(':LibBase')
-    api project(':LibDb')
-    api project(':LibSign')
-    api project(':LibCommon')
-    api project(':LibImg')
+    implementation project(':LibBase')
+    implementation files('libs\\tbs_sdk_thirdapp_v4.3.0.215_44115_sharewithdownloadwithfile_withoutGame_obfs_20211019_111112.jar')
+
+    //底部tabBar
+    implementation('me.majiajie:pager-bottom-tab-strip:2.2.5') {
+        exclude group: 'com.android.support'
+    }
 }
